@@ -3752,42 +3752,94 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateDateDisplay, 1000);
 
     async function fetchWeather() {
+        const el = document.getElementById('portfolioWeather');
+        if (!el) return;
+        
+        if (!el.innerHTML) el.innerHTML = '彰化市 | 載入中...';
+
+        let aqi = '--';
+        let aqiStatus = '待更新';
+        let weatherStr = '更新中';
+        let temp = '--';
+        let success = false;
+
         try {
-            const weatherRes = await fetch('https://api.open-meteo.com/v1/forecast?latitude=24.08&longitude=120.54&current=temperature_2m,weather_code');
-            const aqiRes = await fetch('https://air-quality-api.open-meteo.com/v1/air-quality?latitude=24.08&longitude=120.54&current=us_aqi');
-            
-            if (!weatherRes.ok || !aqiRes.ok) return;
-            const weatherData = await weatherRes.json();
-            const aqiData = await aqiRes.json();
-            
-            const temp = weatherData.current.temperature_2m;
-            const code = weatherData.current.weather_code;
-            const aqi = aqiData.current.us_aqi;
-            
-            let weatherStr = '晴天';
-            if ([1,2,3].includes(code)) weatherStr = '多雲';
-            else if ([45,48].includes(code)) weatherStr = '霧';
-            else if ([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code)) weatherStr = '雨天';
-            else if ([71,73,75,77,85,86].includes(code)) weatherStr = '雪天';
-            else if ([95,96,99].includes(code)) weatherStr = '雷雨';
-            
-            let aqiStatus = '良好';
-            if (aqi > 50) aqiStatus = '普通';
-            if (aqi > 100) aqiStatus = '對敏感族群不良';
-            if (aqi > 150) aqiStatus = '對所有族群不良';
-            if (aqi > 200) aqiStatus = '非常不良';
-            if (aqi > 300) aqiStatus = '有害';
-            
-            const el = document.getElementById('portfolioWeather');
-            if (el) {
-                el.innerHTML = `彰化市 | ${weatherStr} ${temp}°C<br>AQI: ${aqi} (${aqiStatus})`;
+            // 1. 抓取氣溫 (Open-Meteo)
+            try {
+                const weatherRes = await fetch('https://api.open-meteo.com/v1/forecast?latitude=24.08&longitude=120.54&current=temperature_2m,weather_code&t=' + Date.now());
+                if (weatherRes.ok) {
+                    const weatherData = await weatherRes.json();
+                    temp = weatherData.current.temperature_2m;
+                    const code = weatherData.current.weather_code;
+                    weatherStr = '晴天';
+                    if ([1,2,3].includes(code)) weatherStr = '多雲';
+                    else if ([45,48].includes(code)) weatherStr = '霧';
+                    else if ([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code)) weatherStr = '雨天';
+                    else if ([71,73,75,77,85,86].includes(code)) weatherStr = '雪天';
+                    else if ([95,96,99].includes(code)) weatherStr = '雷雨';
+                }
+            } catch(e) {}
+
+            // 2. 抓取 AQI (多重備援)
+            // A. 環境部 MoENV
+            try {
+                const aqiRes = await fetch('https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1&format=JSON&filters=sitename,EQ,彰化&t=' + Date.now());
+                if (aqiRes.ok) {
+                    const aqiData = await aqiRes.json();
+                    if (aqiData.records && aqiData.records.length > 0) {
+                        aqi = aqiData.records[0].aqi;
+                        aqiStatus = aqiData.records[0].status;
+                        success = true;
+                    }
+                }
+            } catch(e) {}
+
+            // B. 如果 A 失敗，嘗試 WAQI (彰化站)
+            if (!success) {
+                try {
+                    const waqiRes = await fetch('https://api.waqi.info/feed/taiwan/changhua/?token=demo&t=' + Date.now());
+                    if (waqiRes.ok) {
+                        const waqiData = await waqiRes.json();
+                        if (waqiData.status === 'ok') {
+                            aqi = waqiData.data.aqi;
+                            const v = parseInt(aqi);
+                            aqiStatus = v > 150 ? '不健康' : (v > 100 ? '敏感不佳' : (v > 50 ? '普通' : '良好'));
+                            success = true;
+                        }
+                    }
+                } catch(e) {}
             }
-        } catch(e) {
-            console.log('Weather fetch error', e);
+
+            // C. 如果 B 也失敗，嘗試 Open-Meteo
+            if (!success) {
+                try {
+                    const backupAqiRes = await fetch('https://air-quality-api.open-meteo.com/v1/air-quality?latitude=24.08&longitude=120.54&current=us_aqi&t=' + Date.now());
+                    if (backupAqiRes.ok) {
+                        const backupData = await backupAqiRes.json();
+                        aqi = backupData.current.us_aqi;
+                        aqiStatus = aqi > 100 ? '不佳' : (aqi > 50 ? '普通' : '良好');
+                        success = true;
+                    }
+                } catch(e) {}
+            }
+
+            // 3. 更新 UI
+            const updateTime = new Date().toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit' });
+            el.innerHTML = `彰化市 | ${weatherStr} ${temp}°C<br>AQI: ${aqi} (${aqiStatus}) <span style="font-size:10px; opacity:0.6; margin-left:4px;">${updateTime}</span>`;
+            
+            // 如果還是失敗，縮短下次嘗試時間 (1分鐘後再試)
+            if (!success) {
+                setTimeout(fetchWeather, 60000);
+            }
+
+        } catch(generalError) {
+            console.log('General weather error', generalError);
+            el.innerHTML = `彰化市 | 數據更新中... <span style="font-size:10px; opacity:0.6;">${new Date().toLocaleTimeString('zh-TW', {hour12:false, hour:'2-digit', minute:'2-digit'})}</span>`;
+            setTimeout(fetchWeather, 60000);
         }
     }
     fetchWeather();
-    setInterval(fetchWeather, 3600000); // 每小時更新一次
+    setInterval(fetchWeather, 1800000); // 每 30 分鐘更新一次
 
     // --- Accounting Logic ---
     function formatAccDateLabel(d) {

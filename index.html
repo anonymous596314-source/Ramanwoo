@@ -2985,7 +2985,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                     <div style="display:flex; flex-direction:row; gap:8px; align-items:center; justify-content:flex-end;">
-                        <button class="btn-analyze" data-code="${item.code}" data-name="${item.name}" style="padding:4px 12px; font-size:12px; background:transparent; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:6px; cursor:pointer;">分析</button>
+                        <button class="btn-analyze" data-code="${item.code}" data-name="${item.name}" data-avg-cost="${item.unitCost}" style="padding:4px 12px; font-size:12px; background:transparent; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:6px; cursor:pointer;">分析</button>
                         <button class="btn-delete" data-id="${item.id}" style="padding:4px 12px; font-size:12px;">刪除</button>
                     </div>
                 </div>
@@ -3202,7 +3202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="inv-result-rate ${profitClass}">${rateStr}</span>
                     </div>
                     <div style="display:flex; flex-direction:row; gap:8px; align-items:center; justify-content:flex-end;">
-                        <button class="btn-analyze" data-code="${item.code}" data-name="${item.name}" style="padding:4px 12px; font-size:12px; background:transparent; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:6px; cursor:pointer;">分析</button>
+                        <button class="btn-analyze" data-code="${item.code}" data-name="${item.name}" data-avg-cost="${item.unitCost}" style="padding:4px 12px; font-size:12px; background:transparent; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:6px; cursor:pointer;">分析</button>
                         <button class="btn-delete-st" data-id="${item.id}" style="padding:4px 12px; font-size:12px;">刪除</button>
                     </div>
                 </div>

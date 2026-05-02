@@ -23,15 +23,16 @@ document.body.addEventListener('click', async (e) => {
         const btn = e.target.closest('.btn-analyze');
         const symbol = btn.getAttribute('data-code');
         const name = btn.getAttribute('data-name');
+        const avgCost = btn.getAttribute('data-avg-cost');
         
-        openAnalysisModal(symbol, name);
+        openAnalysisModal(symbol, name, avgCost);
     }
 });
 
 // Caches for APIs to avoid repeated large fetches
 let twseBasicCache = null;
 
-async function openAnalysisModal(symbol, name) {
+async function openAnalysisModal(symbol, name, avgCost) {
     analysisTitle.textContent = `📊 ${name} (${symbol}) 分析報告`;
     analysisModal.classList.add('active');
     
@@ -54,7 +55,7 @@ async function openAnalysisModal(symbol, name) {
             fetchFinMindInstitutional(symbol)
         ]);
 
-        renderAnalysis(symbol, name, chartData, twseBasic, chipsData, revData, finData, marginData, institutionalData);
+        renderAnalysis(symbol, name, chartData, twseBasic, chipsData, revData, finData, marginData, institutionalData, avgCost);
 
     } catch (err) {
         console.error("Analysis fetch error:", err);
@@ -554,7 +555,7 @@ async function fetchFinMindInstitutional(symbol) {
 
 // === Rendering Logic ===
 
-function renderAnalysis(symbol, name, chartData, twseBasic, chipsData, revData, finData, marginData, institutionalData) {
+function renderAnalysis(symbol, name, chartData, twseBasic, chipsData, revData, finData, marginData, institutionalData, avgCost = null) {
     const { currentPrice, ma, high52w, low52w, posIn52w, rsi14, bb, avgVol5, kd, macd } = chartData;
     
     // 市値計算
@@ -564,6 +565,9 @@ function renderAnalysis(symbol, name, chartData, twseBasic, chipsData, revData, 
     // If fundamental data is missing, we don't calculate fake valuations
     const eps = twseBasic?.pe && currentPrice ? currentPrice / twseBasic.pe : null;
     const currentDiv = twseBasic?.yield && currentPrice ? currentPrice * (twseBasic.yield / 100) : null;
+    
+    // 成本殖利率
+    const costYield = (currentDiv && avgCost && avgCost > 0) ? (currentDiv / avgCost * 100) : null;
     
     // 1. Dividend Method
     const divCheap = currentDiv ? currentDiv / 0.05 : null;
@@ -592,6 +596,14 @@ function renderAnalysis(symbol, name, chartData, twseBasic, chipsData, revData, 
         summaryText += `目前本益比約 ${twseBasic.pe} 倍，相對便宜。`;
     } else if (twseBasic?.pe && twseBasic.pe > 20) {
         summaryText += `目前本益比約 ${twseBasic.pe} 倍，估值偏高需留意風險。`;
+    }
+
+    if (twseBasic?.yield && twseBasic.yield > 5) {
+        summaryText += `目前殖利率達 ${twseBasic.yield}%，屬於高殖利率標的，具備收息吸引力。`;
+    }
+
+    if (costYield && costYield > 6) {
+        summaryText += `您的成本殖利率高達 ${costYield.toFixed(2)}%，遠優於市場平均，是一筆非常成功的長線投資。`;
     }
     
     if (revData?.yoy && revData.yoy > 10) {
@@ -636,6 +648,23 @@ function renderAnalysis(symbol, name, chartData, twseBasic, chipsData, revData, 
             <!-- 2. 合理價格評估 -->
             <div class="analysis-card">
                 <div class="analysis-card-title">💰 合理價格評估</div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px; background:rgba(37, 99, 235, 0.1); padding:8px 12px; border-radius:8px; border:1px solid rgba(37, 99, 235, 0.2);">
+                    <div style="text-align:center; flex:1;">
+                        <div style="font-size:10px; color:#94a3b8;">當前本益比 (PE)</div>
+                        <div style="font-size:15px; font-weight:700; color:#fff;">${twseBasic?.pe ? twseBasic.pe + ' 倍' : 'N/A'}</div>
+                    </div>
+                    <div style="width:1px; background:rgba(255,255,255,0.1); margin:0 10px;"></div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="font-size:10px; color:#94a3b8;">當前殖利率 (Yield)</div>
+                        <div style="font-size:15px; font-weight:700; color:#ef4444;">${twseBasic?.yield ? twseBasic.yield + '%' : 'N/A'}</div>
+                    </div>
+                    ${avgCost ? `
+                    <div style="width:1px; background:rgba(255,255,255,0.1); margin:0 10px;"></div>
+                    <div style="text-align:center; flex:1;">
+                        <div style="font-size:10px; color:#94a3b8;">成本殖利率</div>
+                        <div style="font-size:15px; font-weight:700; color:#fbbf24;">${costYield ? costYield.toFixed(2) + '%' : 'N/A'}</div>
+                    </div>` : ''}
+                </div>
                 <div style="font-size:11px; color:#94a3b8; margin-bottom:8px;">基於歷年股利推算 (5% / 4% / 3%)</div>
                 ${renderValuationRow('便宜價 (5%殖利率)', divCheap)}
                 ${renderValuationRow('合理價 (4%殖利率)', divReasonable)}

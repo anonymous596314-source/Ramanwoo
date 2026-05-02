@@ -458,14 +458,14 @@ select option {
 
 .inv-stat { display: flex; flex-direction: column; gap: 4px; }
 .inv-stat span:first-child { font-size: 12px; color: var(--text-secondary); }
-.inv-stat span:last-child { font-size: 18px; font-weight: 500; color: var(--text-primary); }
+.inv-stat span:last-child { font-size: 20px; font-weight: 500; color: var(--text-primary); }
 
 .input-stat label { margin: 0; font-size: 11px; color: #94a3b8; }
 .input-stat input {
     background: rgba(0,0,0,0.2);
     border: none;
     color: var(--text-primary);
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     padding: 2px 6px;
     border-radius: 4px;
@@ -2933,30 +2933,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="inv-stat">
                         <span style="font-size:12px; color:var(--text-secondary);">現在價格</span>
                         <div style="display:flex; align-items:center;">
-                            <span style="color:#60a5fa; font-weight:600; font-size:18px;">$</span>
+                            <span style="color:#60a5fa; font-weight:600; font-size:20px;">$</span>
                             <input type="number" step="0.01" min="0" value="${item.currentPrice}" data-id="${item.id}" class="live-price-input" style="font-size:20px; font-weight:600; width:100%; background:transparent; border:none; color:#60a5fa; outline:none; padding:0;" title="即時股價">
                         </div>
                     </div>
                     <div class="inv-stat">
                         <span style="font-size:12px; color:var(--text-secondary);">股票市值</span>
-                        <span style="font-size:20px; font-weight:600; color:#f8fafc;">$${formatCurrency(totalRevenue)}</span>
+                        <span style="font-size:20px; font-weight:500; color:#f8fafc;">$${formatCurrency(totalRevenue)}</span>
                     </div>
                     <div class="inv-stat input-stat">
                         <label>已領配息總額</label>
                         <div style="display:flex; align-items:center;">
-                            <span style="margin-right:2px; font-size:16px; color:var(--text-primary);">$</span>
-                            <input type="number" step="1" min="0" value="${item.dividend}" data-id="${item.id}" class="live-dividend-input" style="color:var(--text-primary); background:transparent; padding-left:0; outline:none;">
+                            <span style="margin-right:2px; font-size:20px; color:var(--text-primary);">$</span>
+                            <input type="number" step="1" min="0" value="${item.dividend}" data-id="${item.id}" class="live-dividend-input" style="font-size:20px; font-weight:500; color:var(--text-primary); background:transparent; padding-left:0; outline:none;">
                         </div>
                     </div>
                     <div class="inv-stat">
                         <span style="font-size:12px; color:var(--text-secondary);">平均成本</span>
-                        <span style="font-size:18px; font-weight:500; color:var(--text-primary); margin-top:2px;">$ ${formatCurrency(item.unitCost, true)}</span>
+                        <span style="font-size:20px; font-weight:500; color:var(--text-primary); margin-top:2px;">$ ${formatCurrency(item.unitCost, true)}</span>
                     </div>
                     <div class="inv-stat input-stat">
                         <label>買進總金額</label>
                         <div style="display:flex; align-items:center;">
-                            <span style="margin-right:2px; font-size:16px; color:var(--text-primary);">$</span>
-                            <input type="number" step="1" min="0" value="${item.totalCost}" data-id="${item.id}" class="live-cost-input" style="color:var(--text-primary); background:transparent; padding-left:0; outline:none;">
+                            <span style="margin-right:2px; font-size:20px; color:var(--text-primary);">$</span>
+                            <input type="number" step="1" min="0" value="${item.totalCost}" data-id="${item.id}" class="live-cost-input" style="font-size:20px; font-weight:500; color:var(--text-primary); background:transparent; padding-left:0; outline:none;">
                         </div>
                     </div>
                 </div>

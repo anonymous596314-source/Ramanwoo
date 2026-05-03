@@ -456,21 +456,21 @@ select option {
     margin-bottom: 16px;
 }
 
-.inv-stat { display: flex; flex-direction: column; gap: 2px; }
-.inv-stat span:first-child, .inv-stat label { font-size: 13px; color: var(--text-secondary); margin: 0; }
-.inv-stat span:last-child { font-size: 20px; font-weight: 600; color: var(--text-primary); }
+.inv-stat { display: flex; flex-direction: column; gap: 4px; }
+.inv-stat span:first-child { font-size: 12px; color: var(--text-secondary); }
+.inv-stat span:last-child { font-size: 18px; font-weight: 500; color: var(--text-primary); }
 
-.input-stat label { margin: 0; font-size: 13px; color: var(--text-secondary); }
+.input-stat label { margin: 0; font-size: 11px; color: #94a3b8; }
 .input-stat input {
-    background: transparent;
+    background: rgba(0,0,0,0.2);
     border: none;
     color: var(--text-primary);
-    font-size: 20px;
-    font-weight: 600;
-    padding: 0;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 2px 6px;
     border-radius: 4px;
     width: 100%;
-    margin-top: 0;
+    margin-top: 2px;
 }
 .input-stat input:focus { border-color: var(--btn-primary); background: rgba(255,255,255,0.1); }
 
@@ -801,15 +801,6 @@ span.pronounce-wrong {
         width: 100%;
         box-sizing: border-box;
     }
-
-    /* Standardize inventory font sizes on mobile */
-    .inv-stat input, .inv-stat span:last-child, .live-shares-input {
-        font-size: 20px !important;
-        font-weight: 600 !important;
-    }
-    .inv-stat .live-name-input {
-        font-size: 18px !important; /* Keep name slightly smaller */
-    }
     
     .inv-header {
         flex-direction: row;
@@ -1130,39 +1121,6 @@ span.pronounce-wrong {
     .btn { padding: 12px; font-size: 14px; border-radius: 10px; }
     .divider { margin: 12px 0; }
     .result-section { margin-top: 14px; margin-bottom: 14px; }
-
-    /* Dashboard Card Responsive Fixes */
-    @media (max-width: 480px) {
-        .card-inner-split {
-            flex-direction: column !important;
-            gap: 10px !important;
-        }
-        .card-inner-split > div {
-            width: 100% !important;
-        }
-        .card-inner-split .value {
-            font-size: 18px !important;
-        }
-        .card-inner-split div[style*="width:1px"] {
-            width: 100% !important;
-            height: 1px !important;
-            margin: 4px 0 !important;
-        }
-
-        .dividend-grid, .realized-grid {
-            flex-direction: column !important;
-            gap: 10px !important;
-        }
-        .dividend-grid > div, .realized-grid > div {
-            width: 100% !important;
-        }
-        .dividend-grid .label, .realized-grid .label {
-            font-size: 12px !important;
-        }
-        .dividend-grid .value-input, .realized-grid .value-input {
-            font-size: 18px !important;
-        }
-    }
 }
 
 /* ── Tablet (641–900px) ─────────────────────────────────────────────────── */
@@ -1332,28 +1290,7 @@ span.pronounce-wrong {
                     <h2>即時庫存</h2>
                     <p id="portfolioDate" style="margin-bottom:2px;">您的個人投資組合</p>
                     <p id="portfolioClock" style="font-size:14px; color:var(--text-secondary);">&nbsp;</p>
-                    <div style="margin-top:4px;">
-                        <p style="font-size:14px; color:var(--text-secondary); margin:0; display:flex; align-items:center;">
-                            <select id="citySelector" style="background:transparent; border:none; color:#f8fafc; font-size:14px; padding:0; margin:0; outline:none; cursor:pointer; font-weight:bold; font-family:inherit; -webkit-appearance:none; appearance:none; width:4.5em;">
-                                <option value="彰化,24.08,120.54">彰化市</option>
-                                <option value="臺北,25.04,121.51">臺北市</option>
-                                <option value="新北,25.01,121.46">新北市</option>
-                                <option value="桃園,24.99,121.31">桃園市</option>
-                                <option value="臺中,24.14,120.67">臺中市</option>
-                                <option value="臺南,22.99,120.21">臺南市</option>
-                                <option value="高雄,22.62,120.31">高雄市</option>
-                                <option value="基隆,25.13,121.74">基隆市</option>
-                                <option value="新竹,24.81,120.97">新竹市</option>
-                                <option value="嘉義,23.48,120.45">嘉義市</option>
-                                <option value="宜蘭,24.75,121.75">宜蘭縣</option>
-                                <option value="花蓮,23.98,121.61">花蓮縣</option>
-                                <option value="臺東,22.75,121.15">臺東縣</option>
-                                <option value="屏東,22.67,120.49">屏東縣</option>
-                            </select>
-                            <span id="portfolioWeatherMain" style="margin:0; padding:0;">載入中...</span>
-                        </p>
-                        <p id="portfolioWeatherAQI" style="font-size:14px; color:var(--text-secondary); margin-top:1px;"></p>
-                    </div>
+                    <p id="portfolioWeather" style="font-size:14px; color:var(--text-secondary); margin-top:2px;"></p>
                 </div>
                 <div style="display:flex; gap:10px; align-items:center;">
                     <button id="toggleViewBtn" class="btn secondary-btn" style="background:rgba(139, 92, 246, 0.2); border-color:rgba(139, 92, 246, 0.5); color:#c4b5fd;">⇄ 切換至短期操作</button>
@@ -1392,61 +1329,60 @@ span.pronounce-wrong {
                     <span class="label">淨總資產</span>
                     <span class="value" id="totalAssetValue" style="color:#60a5fa;">0</span>
                 </div>
-                <div style="display:flex; gap:10px; flex-basis:100%; margin-top:4px; flex-wrap:wrap;">
-                    <!-- 左卡: 總未實現損益 (左) | 總付出成本 (右) -->
-                    <div class="dashboard-card" style="flex:1; min-width:150px;">
-                        <div class="card-inner-split" style="display:flex; gap:8px;">
-                            <div style="flex:1; display:flex; flex-direction:column;">
-                                <span class="label">總未實現損益</span>
-                                <span class="value" id="totalInventoryProfit" style="margin:2px 0;">0</span>
-                                <span id="totalInventoryProfitRate" style="font-size:14px; font-weight:700;">0.00%</span>
+                <div style="display:flex; gap:16px; flex-basis:100%; margin-top:4px; flex-wrap:wrap;">
+                    <div class="dashboard-card" style="flex:1; min-width:160px;">
+                        <span class="label">總未實現損益</span>
+                        <span class="value" id="totalInventoryProfit">0</span>
+                        <span id="totalInventoryProfitRate"
+                            style="font-size:14px; font-weight:700; margin-top:2px;">0.00%</span>
+                    </div>
+                    <div class="dashboard-card" style="flex:1; min-width:160px;">
+                        <span class="label">總付出成本</span>
+                        <span class="value" id="totalInventoryCost">0</span>
+                    </div>
+                    <div class="dashboard-card"
+                        style="flex:1; min-width:180px; display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+                        <div>
+                            <span class="label" style="display:block; margin-bottom:4px;">當年度已實現損益</span>
+                            <div style="display:flex; align-items:center;">
+                                <span class="value-prefix compact" style="margin-right:4px;">$</span>
+                                <input type="number" id="yearlyRealizedInput" value="0" step="1"
+                                    class="value-input compact">
                             </div>
-                            <div style="width:1px; background:rgba(255,255,255,0.1); margin:2px 0;"></div>
-                            <div style="flex:1; display:flex; flex-direction:column;">
-                                <span class="label">總付出成本</span>
-                                <span class="value" id="totalInventoryCost" style="margin:2px 0;">0</span>
+                        </div>
+                        <div style="border-top:1px dashed rgba(255,255,255,0.1); padding-top:10px;">
+                            <span class="label" style="display:block; margin-bottom:4px;">總投資已實現損益</span>
+                            <div style="display:flex; align-items:center;">
+                                <span class="value-prefix compact" style="margin-right:4px;">$</span>
+                                <input type="number" id="totalRealizedInput" value="0" step="1"
+                                    class="value-input compact">
                             </div>
                         </div>
                     </div>
-                    <!-- 右卡: 領息三欄 (上) + 當年度/總投資並排 (下) -->
-                    <div class="dashboard-card" style="flex:1; min-width:180px; display:flex; flex-direction:column; gap:6px;">
-                        <div class="dividend-grid" style="display:flex; gap:6px;">
-                            <div style="flex:1;">
-                                <span class="label">年度總領配息</span>
-                                <div style="display:flex; align-items:center;">
-                                    <span class="value-prefix compact" style="margin-right:2px; font-size:11px;">$</span>
-                                    <input type="text" id="totalDividendVal" class="value-input compact" style="width:100%; font-size:16px;" value="0" inputmode="numeric">
-                                </div>
-                            </div>
-                            <div style="flex:1;">
-                                <span class="label">可抵扣稅額</span>
-                                <div style="display:flex; align-items:center;">
-                                    <span class="value-prefix compact" style="margin-right:2px; font-size:11px;">$</span>
-                                    <input type="text" id="dividendTaxOffsetVal" class="value-input compact" style="width:100%; font-size:16px;" value="0" inputmode="numeric">
-                                </div>
-                            </div>
-                            <div style="flex:1;">
-                                <span class="label">合計</span>
-                                <div style="display:flex; align-items:center;">
-                                    <span class="value-prefix compact" style="margin-right:2px; font-size:11px;">$</span>
-                                    <input type="text" id="dividendTotalBenefitVal" class="value-input compact" style="width:100%; font-size:16px;" value="0" inputmode="numeric">
-                                </div>
+                </div>
+                <div class="dashboard-card"
+                    style="flex-basis: 100%; margin-top: 10px; background: rgba(16, 185, 129, 0.1); border: 1px dashed rgba(16, 185, 129, 0.3);">
+                    <span class="label">年度領息總結</span>
+                    <div style="display:flex; justify-content:space-between; margin-top: 8px; gap:8px;">
+                        <div style="display:flex; flex-direction:column; flex:1;">
+                            <span style="font-size:12px; color:var(--text-secondary); margin-bottom:4px;">年度總領配息</span>
+                            <div style="display:flex; align-items:center;">
+                                <span class="value-prefix compact" style="margin-right:4px;">$</span>
+                                <input type="number" id="totalDividendVal" class="value-input compact" style="width:100%; text-align:left;" value="0" step="1">
                             </div>
                         </div>
-                        <div class="realized-grid" style="border-top:1px dashed rgba(255,255,255,0.1); padding-top:5px; display:flex; gap:6px;">
-                            <div style="flex:1;">
-                                <span class="label">當年度已實現損益</span>
-                                <div style="display:flex; align-items:center;">
-                                    <span class="value-prefix compact" style="margin-right:2px; font-size:11px;">$</span>
-                                    <input type="number" id="yearlyRealizedInput" value="0" step="1" class="value-input compact" style="width:100%; font-size:16px;">
-                                </div>
+                        <div style="display:flex; flex-direction:column; flex:1;">
+                            <span style="font-size:12px; color:var(--text-secondary); margin-bottom:4px;">8.5%抵扣稅額</span>
+                            <div style="display:flex; align-items:center;">
+                                <span class="value-prefix compact" style="margin-right:4px;">$</span>
+                                <input type="number" id="dividendTaxOffsetVal" class="value-input compact" style="width:100%; text-align:left;" value="0" step="1">
                             </div>
-                            <div style="flex:1;">
-                                <span class="label">總投資已實現損益</span>
-                                <div style="display:flex; align-items:center;">
-                                    <span class="value-prefix compact" style="margin-right:2px; font-size:11px;">$</span>
-                                    <input type="number" id="totalRealizedInput" value="0" step="1" class="value-input compact" style="width:100%; font-size:16px;">
-                                </div>
+                        </div>
+                        <div style="display:flex; flex-direction:column; flex:1;">
+                            <span style="font-size:12px; color:var(--text-secondary); margin-bottom:4px;">額外領息結算</span>
+                            <div style="display:flex; align-items:center;">
+                                <span class="value-prefix compact" style="margin-right:4px;">$</span>
+                                <input type="number" id="dividendTotalBenefitVal" class="value-input compact" style="width:100%; text-align:left;" value="0" step="1">
                             </div>
                         </div>
                     </div>
@@ -1461,7 +1397,6 @@ span.pronounce-wrong {
                 尚未加入任何庫存<br><span style="font-size:12px;opacity:0.6;">在左側計算完畢後，點擊「加到我的庫存」</span>
             </div>
             </div>
-
 
             <!-- 短期操作視圖 -->
             <div id="shortTermView" style="display:none; flex-direction:column; flex-grow:1; flex-shrink:1; min-height:0;">
@@ -2468,19 +2403,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const dividendTaxOffsetValEl = document.getElementById('dividendTaxOffsetVal');
         const dividendTotalBenefitValEl = document.getElementById('dividendTotalBenefitVal');
         
-        function formatDividendInput(el, rawVal) {
-            const num = parseInt(String(rawVal).replace(/,/g, ''), 10);
-            el.value = isNaN(num) ? '0' : num.toLocaleString('zh-TW');
-        }
-
         if(totalDividendValEl && localStorage.getItem('twStockTotalDividend')) {
-            formatDividendInput(totalDividendValEl, localStorage.getItem('twStockTotalDividend'));
+            totalDividendValEl.value = localStorage.getItem('twStockTotalDividend');
         }
         if(dividendTaxOffsetValEl && localStorage.getItem('twStockDividendTaxOffset')) {
-            formatDividendInput(dividendTaxOffsetValEl, localStorage.getItem('twStockDividendTaxOffset'));
+            dividendTaxOffsetValEl.value = localStorage.getItem('twStockDividendTaxOffset');
         }
         if(dividendTotalBenefitValEl && localStorage.getItem('twStockDividendTotalBenefit')) {
-            formatDividendInput(dividendTotalBenefitValEl, localStorage.getItem('twStockDividendTotalBenefit'));
+            dividendTotalBenefitValEl.value = localStorage.getItem('twStockDividendTotalBenefit');
         }
 
         const savedCapital = localStorage.getItem('twStockShortTermCapital');
@@ -2669,38 +2599,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Network helper for CORS Proxies ---
     async function fetchWithProxy(targetUrl, isJson = false) {
         const proxies = [
-            // allorigins - supports null origin, wraps in {contents:...}
-            { url: (u) => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`, allorigins: true },
-            // allorigins raw - direct content
-            { url: (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`, allorigins: false },
-            // corsproxy.io
-            { url: (u) => `https://corsproxy.io/?${encodeURIComponent(u)}`, allorigins: false },
-            // thingproxy
-            { url: (u) => `https://thingproxy.freeboard.io/fetch/${u}`, allorigins: false },
-            // codetabs (有流量限制)
-            { url: (u) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`, allorigins: false },
+            (url) => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+            (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+            (url) => `https://corsproxy.io/?${encodeURIComponent(url)}` // or ?url=
         ];
 
-        for (let proxy of proxies) {
-            const proxyUrl = proxy.url(targetUrl);
+        for (let getProxyUrl of proxies) {
+            const proxyUrl = getProxyUrl(targetUrl);
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 15000); // 15秒 timeout
+                const timeoutId = setTimeout(() => controller.abort(), 6000);
                 const res = await fetch(proxyUrl, { signal: controller.signal });
                 clearTimeout(timeoutId);
 
                 if (res.ok) {
-                    if (proxy.allorigins) {
+                    if (proxyUrl.includes('allorigins.win/get')) {
                         const data = await res.json();
-                        if (data && data.contents && data.contents.length > 10) {
+                        if (data && data.contents) {
                             return isJson ? JSON.parse(data.contents) : data.contents;
                         }
                     } else {
-                        const text = await res.text();
-                        // 過濾掉明顯的錯誤回應
-                        if (text && text.length > 10 && !text.startsWith('Edge:') && !text.startsWith('Error')) {
-                            return isJson ? JSON.parse(text) : text;
-                        }
+                        return isJson ? await res.json() : await res.text();
                     }
                 }
             } catch (e) {
@@ -2718,101 +2637,52 @@ document.addEventListener('DOMContentLoaded', () => {
         let anySuccess = false;
         let allItems = [...inventory, ...shortTermInventory];
 
-        // 嚴格的價格驗證函數
-        function validatePrice(raw) {
-            if (raw === null || raw === undefined || raw === '' || raw === '-') return null;
-            const cleaned = String(raw).replace(/,/g, '').replace(/\s/g, '').trim();
-            const num = parseFloat(cleaned);
-            if (isNaN(num) || num <= 0 || num > 100000000) return null; // 異常值過濾
-            return num;
-        }
-
-        // Step 1. 主力：TWSE 官方 API（上市股）先直連，CORS 被擋再用 proxy
+        // 0. Primary official TWSE data (No proxy needed, works for all listed Taiwan stocks)
         let twseMap = {};
         try {
             const twseRes = await fetch('https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL');
             if (twseRes.ok) {
                 const twseData = await twseRes.json();
                 twseData.forEach(dt => {
-                    const p = validatePrice(dt.ClosingPrice);
-                    if (p !== null) twseMap[dt.Code] = p;
-                });
-                console.log(`[TWSE 直連] 載入 ${Object.keys(twseMap).length} 筆收盤價`);
-            }
-        } catch(e) {
-            console.warn('[TWSE 直連] 失敗，改用 proxy:', e.message);
-        }
-        // 直連失敗才走 proxy
-        if (Object.keys(twseMap).length === 0) {
-            try {
-                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL')}`;
-                const r2 = await fetch(proxyUrl);
-                if (r2.ok) {
-                    const wrapper = await r2.json();
-                    const d = JSON.parse(wrapper.contents);
-                    d.forEach(dt => {
-                        const p = validatePrice(dt.ClosingPrice);
-                        if (p !== null) twseMap[dt.Code] = p;
-                    });
-                    console.log(`[TWSE Proxy] 載入 ${Object.keys(twseMap).length} 筆收盤價`);
-                }
-            } catch(e2) {
-                console.warn('[TWSE Proxy] 也失敗:', e2.message);
-            }
-        }
-
-        // Step 2. 備援：TPEx 官方 API（上櫃股）
-        let tpexMap = {};
-        try {
-            const tpexRes = await fetch(`https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes`);
-            if (tpexRes.ok) {
-                const tpexData = await tpexRes.json();
-                tpexData.forEach(dt => {
-                    const p = validatePrice(dt.Close);
-                    if (p !== null && dt.SecuritiesCompanyCode) {
-                        tpexMap[dt.SecuritiesCompanyCode] = p;
+                    if(dt.ClosingPrice) {
+                        twseMap[dt.Code] = parseFloat(String(dt.ClosingPrice).replace(/,/g, ''));
                     }
                 });
-                console.log(`[TPEx] 載入 ${Object.keys(tpexMap).length} 筆上櫃股價`);
             }
         } catch(e) {
-            console.warn('[TPEx] 上櫃 API 失敗:', e);
+            console.warn("TWSE API failed:", e);
         }
 
         for (let item of allItems) {
             let rawSymbol = item.code.trim().replace(/\.TW$/i, '').replace(/\.TWO$/i, '');
-
-            // ── TWSE 查詢 ──
-            if (twseMap[rawSymbol] !== undefined) {
-                const price = twseMap[rawSymbol];
-                console.log(`[TWSE] ${rawSymbol}: ${price} (現價: ${item.currentPrice})`);
-                if (!anySuccess) recordState();
-                item.currentPrice = price;  // 永遠套用最新收盤價
-                anySuccess = true;
-                continue;
+            
+            // Fast track TWSE map lookup
+            if (twseMap[rawSymbol] && !isNaN(twseMap[rawSymbol])) {
+                let price = twseMap[rawSymbol];
+                if (price !== item.currentPrice) {
+                    if (!anySuccess) recordState();
+                    item.currentPrice = price;
+                    anySuccess = true;
+                }
+                continue; // Found it in TWSE, move to next!
             }
 
-            // ── TPEx 查詢 ──
-            if (tpexMap[rawSymbol] !== undefined) {
-                const price = tpexMap[rawSymbol];
-                console.log(`[TPEx] ${rawSymbol}: ${price} (現價: ${item.currentPrice})`);
-                if (!anySuccess) recordState();
-                item.currentPrice = price;  // 永遠套用最新收盤價
-                anySuccess = true;
-                continue;
+            let symbol = item.code.trim();
+            if (/^[a-zA-Z0-9]+$/.test(symbol)) {
+                symbol = `${symbol}.TW`;
+            } else if (!symbol.includes('.')) {
+                symbol = `${symbol}.TW`;
             }
 
-            // ── Yahoo Finance API 備援 ──
-            let symbol = rawSymbol;
-            if (!symbol.includes('.')) symbol = `${symbol}.TW`;
             let fallbackSuccess = false;
 
+            // 1. Yahoo Finance API
             try {
                 const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`;
                 const rawData = await fetchWithProxy(url, true);
-                const price = validatePrice(rawData?.chart?.result?.[0]?.meta?.regularMarketPrice);
-                if (price !== null) {
-                    console.log(`[Yahoo API] ${rawSymbol}: ${price}`);
+                
+                const price = rawData.chart.result[0].meta.regularMarketPrice;
+                if (price) {
                     if (price !== item.currentPrice) {
                         if (!anySuccess) recordState();
                         item.currentPrice = price;
@@ -2820,50 +2690,72 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     fallbackSuccess = true;
                 } else {
-                    throw new Error('Yahoo API 無有效價格');
+                    throw new Error('Yahoo proxy returned no price');
                 }
             } catch (err) {
-                console.warn(`[Yahoo API] ${rawSymbol} 失敗:`, err.message);
+                console.warn('Yahoo API error for', symbol, '- Trying Yahoo TW HTML...');
             }
 
-            // ── Yahoo TW HTML 備援 ──
+            // 2. Yahoo TW HTML (very reliable for TW stocks)
             if (!fallbackSuccess) {
                 try {
+                    const rawSymbol = item.code.trim();
                     const twUrl = `https://tw.stock.yahoo.com/quote/${rawSymbol}`;
                     const html = await fetchWithProxy(twUrl, false);
+                    
+                    let priceValue = null;
                     if (html) {
-                        const patterns = [
-                            /\"regularMarketPrice\":\{\"raw\":([\d\.]+)/,
-                            /\"currentPrice\":([\d\.]+)/,
-                            /\(32px\)[^>]*>([\d,\.]+)<\/span>/
-                        ];
-                        let priceValue = null;
-                        for (const pat of patterns) {
-                            const m = html.match(pat);
-                            if (m?.[1]) {
-                                priceValue = validatePrice(m[1]);
-                                if (priceValue !== null) break;
-                            }
-                        }
-                        if (priceValue !== null) {
-                            console.log(`[Yahoo HTML] ${rawSymbol}: ${priceValue}`);
-                            if (priceValue !== item.currentPrice) {
-                                if (!anySuccess) recordState();
-                                item.currentPrice = priceValue;
-                                anySuccess = true;
-                            }
-                            fallbackSuccess = true;
-                        } else {
-                            throw new Error('Yahoo TW HTML 無有效價格');
+                        const m = html.match(/"currentPrice":([\d\.,]+)/) || html.match(/"regularMarketPrice":\{"raw":([\d\.,]+)/) || html.match(/<span[^>]*Fz\(32px\)[^>]*>([\d\.,]+)<\/span>/);
+                        if (m && m[1]) {
+                            priceValue = window.parseFloat(String(m[1]).replace(/,/g, ''));
                         }
                     }
+                    if (priceValue !== null && !isNaN(priceValue)) {
+                        if (priceValue !== item.currentPrice) {
+                            if (!anySuccess) recordState();
+                            item.currentPrice = priceValue;
+                            anySuccess = true;
+                        }
+                        fallbackSuccess = true;
+                    } else {
+                        throw new Error('Yahoo TW HTML parsed no price');
+                    }
                 } catch(yhErr) {
-                    console.warn(`[Yahoo HTML] ${rawSymbol} 失敗:`, yhErr.message);
+                    console.warn('Yahoo TW HTML error for', item.code, '- Trying CMoney...');
                 }
             }
 
+            // 3. CMoney HTML
             if (!fallbackSuccess) {
-                console.error(`[全部失敗] ${rawSymbol} 無法取得股價，保留原值 ${item.currentPrice}`);
+                try {
+                    const rawSymbol = item.code.trim();
+                    const cmUrl = `https://www.cmoney.tw/finance/twstock/${rawSymbol}`;
+                    const html = await fetchWithProxy(cmUrl, false);
+                    
+                    let priceValue = null;
+                    if (html) {
+                        let mDesc = html.match(/成交價[^\d]*([\d\.,]+)/);
+                        let mProps = html.match(/itemprop="price"[^>]*>([\d\.,]+)/i);
+                        let mJson = html.match(/"price"\s*:\s*([\d\.,]+)/i);
+                        
+                        if (mDesc && mDesc[1]) priceValue = window.parseFloat(String(mDesc[1]).replace(/,/g, ''));
+                        else if (mProps && mProps[1]) priceValue = window.parseFloat(String(mProps[1]).replace(/,/g, ''));
+                        else if (mJson && mJson[1]) priceValue = window.parseFloat(String(mJson[1]).replace(/,/g, ''));
+                    }
+                    
+                    if (priceValue !== null && !isNaN(priceValue)) {
+                        if (priceValue !== item.currentPrice) {
+                            if (!anySuccess) recordState();
+                            item.currentPrice = priceValue;
+                            anySuccess = true;
+                        }
+                        fallbackSuccess = true;
+                    } else {
+                        throw new Error('CMoney HTML parsed no price');
+                    }
+                } catch(cmErr) {
+                    console.error('All fallbacks failed for', item.code, cmErr.message);
+                }
             }
         }
 
@@ -2879,7 +2771,7 @@ document.addEventListener('DOMContentLoaded', () => {
         refreshPricesBtn.disabled = false;
         
         if (!anySuccess && allItems.length > 0) {
-            alert('抓取完成：目前可能因為網路或股票代號問題無法取得最新現價。如有需要請手動更新。');
+            alert('抓取完成：目前可能因為網路或代號問題無法取得最新現價。如有需要請手動更新。');
         }
     }
 
@@ -2961,38 +2853,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="inv-body" style="grid-template-columns: 1fr 1fr 1.2fr;">
                     <div class="inv-stat">
-                        <span style="color:var(--text-secondary);">現在價格</span>
+                        <span style="font-size:12px; color:var(--text-secondary);">現在價格</span>
                         <div style="display:flex; align-items:center;">
-                            <span style="color:#60a5fa; font-weight:600; font-size:20px;">$</span>
+                            <span style="color:#60a5fa; font-weight:600; font-size:18px;">$</span>
                             <input type="number" step="0.01" min="0" value="${item.currentPrice}" data-id="${item.id}" class="live-price-input" style="font-size:20px; font-weight:600; width:100%; background:transparent; border:none; color:#60a5fa; outline:none; padding:0;" title="即時股價">
                         </div>
                     </div>
                     <div class="inv-stat">
-                        <span>股票市值</span>
-                        <div style="display:flex; align-items:center;">
-                            <span style="font-size:20px; font-weight:600; color:#f8fafc; margin-right:2px;">$</span>
-                            <span style="font-size:20px; font-weight:600; color:#f8fafc;">${formatCurrency(totalRevenue)}</span>
-                        </div>
+                        <span style="font-size:12px; color:var(--text-secondary);">股票市值</span>
+                        <span style="font-size:20px; font-weight:600; color:#f8fafc;">$${formatCurrency(totalRevenue)}</span>
                     </div>
                     <div class="inv-stat input-stat">
                         <label>已領配息總額</label>
                         <div style="display:flex; align-items:center;">
-                            <span style="margin-right:2px; font-size:20px; font-weight:600; color:var(--text-primary);">$</span>
-                            <input type="number" step="1" min="0" value="${item.dividend}" data-id="${item.id}" class="live-dividend-input" style="outline:none;">
+                            <span style="margin-right:2px; font-size:16px; color:var(--text-primary);">$</span>
+                            <input type="number" step="1" min="0" value="${item.dividend}" data-id="${item.id}" class="live-dividend-input" style="color:var(--text-primary); background:transparent; padding-left:0; outline:none;">
                         </div>
                     </div>
                     <div class="inv-stat">
-                        <span>平均成本</span>
-                        <div style="display:flex; align-items:center;">
-                            <span style="font-size:20px; font-weight:600; color:var(--text-primary); margin-right:2px;">$</span>
-                            <span style="font-size:20px; font-weight:600; color:var(--text-primary);">${formatCurrency(item.unitCost, true)}</span>
-                        </div>
+                        <span style="font-size:12px; color:var(--text-secondary);">平均成本</span>
+                        <span style="font-size:18px; font-weight:500; color:var(--text-primary); margin-top:2px;">$ ${formatCurrency(item.unitCost, true)}</span>
                     </div>
                     <div class="inv-stat input-stat">
                         <label>買進總金額</label>
                         <div style="display:flex; align-items:center;">
-                            <span style="margin-right:2px; font-size:20px; font-weight:600; color:var(--text-primary);">$</span>
-                            <input type="number" step="1" min="0" value="${item.totalCost}" data-id="${item.id}" class="live-cost-input" style="outline:none;">
+                            <span style="margin-right:2px; font-size:16px; color:var(--text-primary);">$</span>
+                            <input type="number" step="1" min="0" value="${item.totalCost}" data-id="${item.id}" class="live-cost-input" style="color:var(--text-primary); background:transparent; padding-left:0; outline:none;">
                         </div>
                     </div>
                 </div>
@@ -3006,7 +2892,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                     <div style="display:flex; flex-direction:row; gap:8px; align-items:center; justify-content:flex-end;">
-                        <button class="btn-analyze" data-code="${item.code}" data-name="${item.name}" data-avg-cost="${item.unitCost}" style="padding:4px 12px; font-size:12px; background:transparent; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:6px; cursor:pointer;">分析</button>
+                        <button class="btn-analyze" data-code="${item.code}" data-name="${item.name}" style="padding:4px 12px; font-size:12px; background:transparent; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:6px; cursor:pointer;">分析</button>
                         <button class="btn-delete" data-id="${item.id}" style="padding:4px 12px; font-size:12px;">刪除</button>
                     </div>
                 </div>
@@ -3223,7 +3109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="inv-result-rate ${profitClass}">${rateStr}</span>
                     </div>
                     <div style="display:flex; flex-direction:row; gap:8px; align-items:center; justify-content:flex-end;">
-                        <button class="btn-analyze" data-code="${item.code}" data-name="${item.name}" data-avg-cost="${item.unitCost}" style="padding:4px 12px; font-size:12px; background:transparent; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:6px; cursor:pointer;">分析</button>
+                        <button class="btn-analyze" data-code="${item.code}" data-name="${item.name}" style="padding:4px 12px; font-size:12px; background:transparent; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:6px; cursor:pointer;">分析</button>
                         <button class="btn-delete-st" data-id="${item.id}" style="padding:4px 12px; font-size:12px;">刪除</button>
                     </div>
                 </div>
@@ -3496,24 +3382,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 三欄領息輸入框：千分位格式化 ---
-    function bindDividendFormatting(el, storageKey) {
-        if (!el) return;
-        el.addEventListener('focus', () => {
-            // 聚焦時還原純數字，方便輸入
-            el.value = el.value.replace(/,/g, '');
-        });
-        el.addEventListener('blur', () => {
+    const manualDividendValEl = document.getElementById('totalDividendVal');
+    const manualTaxOffsetValEl = document.getElementById('dividendTaxOffsetVal');
+    const manualTotalBenefitValEl = document.getElementById('dividendTotalBenefitVal');
+    
+    if (manualDividendValEl) {
+        manualDividendValEl.addEventListener('change', (e) => {
             recordState();
-            const raw = parseInt(el.value.replace(/,/g, ''), 10);
-            const safeVal = isNaN(raw) ? 0 : raw;
-            el.value = safeVal.toLocaleString('zh-TW');
-            localStorage.setItem(storageKey, String(safeVal));
+            localStorage.setItem('twStockTotalDividend', e.target.value);
         });
     }
-    bindDividendFormatting(document.getElementById('totalDividendVal'),      'twStockTotalDividend');
-    bindDividendFormatting(document.getElementById('dividendTaxOffsetVal'),  'twStockDividendTaxOffset');
-    bindDividendFormatting(document.getElementById('dividendTotalBenefitVal'),'twStockDividendTotalBenefit');
+    if (manualTaxOffsetValEl) {
+        manualTaxOffsetValEl.addEventListener('change', (e) => {
+            recordState();
+            localStorage.setItem('twStockDividendTaxOffset', e.target.value);
+        });
+    }
+    if (manualTotalBenefitValEl) {
+        manualTotalBenefitValEl.addEventListener('change', (e) => {
+            recordState();
+            localStorage.setItem('twStockDividendTotalBenefit', e.target.value);
+        });
+    }
     
     // --- Daily Stats Logic ---
     async function logDailyStats() {
@@ -3773,118 +3663,42 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateDateDisplay, 1000);
 
     async function fetchWeather() {
-        const elMain = document.getElementById('portfolioWeatherMain');
-        const elAqi  = document.getElementById('portfolioWeatherAQI');
-        const citySelector = document.getElementById('citySelector');
-        if (!elMain || !elAqi || !citySelector) return;
-        
-        const [cityName, lat, lon] = citySelector.value.split(',');
-        
-        // --- 1. 抓取氣溫 (Open-Meteo) ---
-        let weatherStr = '更新中';
-        let temp = '--';
         try {
-            const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&t=` + Date.now());
-            if (weatherRes.ok) {
-                const weatherData = await weatherRes.json();
-                temp = weatherData.current.temperature_2m;
-                const code = weatherData.current.weather_code;
-                weatherStr = '晴天';
-                if ([1,2,3].includes(code)) weatherStr = '多雲';
-                else if ([45,48].includes(code)) weatherStr = '霧';
-                else if ([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code)) weatherStr = '雨天';
-                else if ([71,73,75,77,85,86].includes(code)) weatherStr = '雪天';
-                else if ([95,96,99].includes(code)) weatherStr = '雷雨';
+            const weatherRes = await fetch('https://api.open-meteo.com/v1/forecast?latitude=24.08&longitude=120.54&current=temperature_2m,weather_code');
+            const aqiRes = await fetch('https://air-quality-api.open-meteo.com/v1/air-quality?latitude=24.08&longitude=120.54&current=us_aqi');
+            
+            if (!weatherRes.ok || !aqiRes.ok) return;
+            const weatherData = await weatherRes.json();
+            const aqiData = await aqiRes.json();
+            
+            const temp = weatherData.current.temperature_2m;
+            const code = weatherData.current.weather_code;
+            const aqi = aqiData.current.us_aqi;
+            
+            let weatherStr = '晴天';
+            if ([1,2,3].includes(code)) weatherStr = '多雲';
+            else if ([45,48].includes(code)) weatherStr = '霧';
+            else if ([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code)) weatherStr = '雨天';
+            else if ([71,73,75,77,85,86].includes(code)) weatherStr = '雪天';
+            else if ([95,96,99].includes(code)) weatherStr = '雷雨';
+            
+            let aqiStatus = '良好';
+            if (aqi > 50) aqiStatus = '普通';
+            if (aqi > 100) aqiStatus = '對敏感族群不良';
+            if (aqi > 150) aqiStatus = '對所有族群不良';
+            if (aqi > 200) aqiStatus = '非常不良';
+            if (aqi > 300) aqiStatus = '有害';
+            
+            const el = document.getElementById('portfolioWeather');
+            if (el) {
+                el.innerHTML = `彰化市 | ${weatherStr} ${temp}°C<br>AQI: ${aqi} (${aqiStatus})`;
             }
-        } catch(e) {}
-        elMain.innerHTML = `${weatherStr}${temp}°C`;
-
-        // --- 2. 抓取 AQI (多重備援) ---
-        let aqi = '--';
-        let aqiStatus = '待更新';
-        let success = false;
-
-        // A. 環境部 MoENV
-        try {
-            const aqiRes = await fetch(`https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1&format=JSON&filters=sitename,EQ,${cityName}&t=` + Date.now());
-            if (aqiRes.ok) {
-                const aqiData = await aqiRes.json();
-                if (aqiData.records && aqiData.records.length > 0) {
-                    aqi = aqiData.records[0].aqi;
-                    aqiStatus = aqiData.records[0].status;
-                    success = true;
-                }
-            }
-        } catch(e) {}
-
-        // B. 如果 A 失敗，嘗試 Open-Meteo (備援 1)
-        if (!success) {
-            try {
-                const backupAqiRes = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=us_aqi&t=` + Date.now());
-                if (backupAqiRes.ok) {
-                    const backupData = await backupAqiRes.json();
-                    aqi = backupData.current.us_aqi;
-                    aqiStatus = aqi > 150 ? '不健康' : (aqi > 100 ? '敏感不佳' : (aqi > 50 ? '普通' : '良好'));
-                    success = true;
-                }
-            } catch(e) {}
+        } catch(e) {
+            console.log('Weather fetch error', e);
         }
-
-        // C. 如果 B 也失敗，嘗試 WAQI (備援 2)
-        if (!success) {
-            try {
-                const waqiRes = await fetch(`https://api.waqi.info/feed/geo:${lat};${lon}/?token=demo&t=` + Date.now());
-                if (waqiRes.ok) {
-                    const waqiData = await waqiRes.json();
-                    if (waqiData.status === 'ok') {
-                        aqi = waqiData.data.aqi;
-                        const v = parseInt(aqi);
-                        aqiStatus = v > 150 ? '不健康' : (v > 100 ? '敏感不佳' : (v > 50 ? '普通' : '良好'));
-                        success = true;
-                    }
-                }
-            } catch(e) {}
-        }
-
-        // --- 3. 更新 UI ---
-        const updateTime = new Date().toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit' });
-        elAqi.innerHTML = `AQI: ${aqi} (${aqiStatus}) <span style="font-size:10px; opacity:0.6; margin-left:4px;">${updateTime}</span>`;
-        
-        if (!success) setTimeout(fetchWeather, 60000);
     }
-
-    // Initialize Weather & City Selector
-    const citySelector = document.getElementById('citySelector');
-    if (citySelector) {
-        // 動態調整 select 寬度以適應城市名稱長度
-        function resizeCitySelector() {
-            const text = citySelector.options[citySelector.selectedIndex].text;
-            const tempSpan = document.createElement('span');
-            tempSpan.style.visibility = 'hidden';
-            tempSpan.style.position = 'absolute';
-            tempSpan.style.whiteSpace = 'nowrap';
-            tempSpan.style.font = window.getComputedStyle(citySelector).font;
-            tempSpan.textContent = text;
-            document.body.appendChild(tempSpan);
-            citySelector.style.width = (tempSpan.getBoundingClientRect().width + 2) + 'px';
-            document.body.removeChild(tempSpan);
-        }
-
-        citySelector.addEventListener('change', () => {
-            resizeCitySelector();
-            fetchWeather();
-            localStorage.setItem('twStockPreferredCity', citySelector.value);
-        });
-        
-        const savedCity = localStorage.getItem('twStockPreferredCity');
-        if (savedCity) citySelector.value = savedCity;
-        
-        // 初次加載時調整寬度
-        setTimeout(resizeCitySelector, 100);
-    }
-
     fetchWeather();
-    setInterval(fetchWeather, 1800000); // 每 30 分鐘更新一次
+    setInterval(fetchWeather, 3600000); // 每小時更新一次
 
     // --- Accounting Logic ---
     function formatAccDateLabel(d) {

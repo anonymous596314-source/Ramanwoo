@@ -456,21 +456,21 @@ select option {
     margin-bottom: 16px;
 }
 
-.inv-stat { display: flex; flex-direction: column; gap: 2px; }
-.inv-stat span:first-child, .inv-stat label { font-size: 13px; color: var(--text-secondary); margin: 0; }
-.inv-stat span:last-child { font-size: 20px; font-weight: 600; color: var(--text-primary); }
+.inv-stat { display: flex; flex-direction: column; gap: 4px; }
+.inv-stat span:first-child { font-size: 12px; color: var(--text-secondary); }
+.inv-stat span:last-child { font-size: 18px; font-weight: 500; color: var(--text-primary); }
 
-.input-stat label { margin: 0; font-size: 13px; color: var(--text-secondary); }
+.input-stat label { margin: 0; font-size: 11px; color: #94a3b8; }
 .input-stat input {
-    background: transparent;
+    background: rgba(0,0,0,0.2);
     border: none;
     color: var(--text-primary);
-    font-size: 20px;
-    font-weight: 600;
-    padding: 0;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 2px 6px;
     border-radius: 4px;
     width: 100%;
-    margin-top: 0;
+    margin-top: 2px;
 }
 .input-stat input:focus { border-color: var(--btn-primary); background: rgba(255,255,255,0.1); }
 
@@ -801,15 +801,6 @@ span.pronounce-wrong {
         width: 100%;
         box-sizing: border-box;
     }
-
-    /* Standardize inventory font sizes on mobile */
-    .inv-stat input, .inv-stat span:last-child, .live-shares-input {
-        font-size: 20px !important;
-        font-weight: 600 !important;
-    }
-    .inv-stat .live-name-input {
-        font-size: 18px !important; /* Keep name slightly smaller */
-    }
     
     .inv-header {
         flex-direction: row;
@@ -1130,39 +1121,6 @@ span.pronounce-wrong {
     .btn { padding: 12px; font-size: 14px; border-radius: 10px; }
     .divider { margin: 12px 0; }
     .result-section { margin-top: 14px; margin-bottom: 14px; }
-
-    /* Dashboard Card Responsive Fixes */
-    @media (max-width: 480px) {
-        .card-inner-split {
-            flex-direction: column !important;
-            gap: 10px !important;
-        }
-        .card-inner-split > div {
-            width: 100% !important;
-        }
-        .card-inner-split .value {
-            font-size: 18px !important;
-        }
-        .card-inner-split div[style*="width:1px"] {
-            width: 100% !important;
-            height: 1px !important;
-            margin: 4px 0 !important;
-        }
-
-        .dividend-grid, .realized-grid {
-            flex-direction: column !important;
-            gap: 10px !important;
-        }
-        .dividend-grid > div, .realized-grid > div {
-            width: 100% !important;
-        }
-        .dividend-grid .label, .realized-grid .label {
-            font-size: 12px !important;
-        }
-        .dividend-grid .value-input, .realized-grid .value-input {
-            font-size: 18px !important;
-        }
-    }
 }
 
 /* ── Tablet (641–900px) ─────────────────────────────────────────────────── */
@@ -1189,7 +1147,6 @@ span.pronounce-wrong {
         });
       }
     </script>
-<script src="long_articles.js"></script>
 </head>
 
 <body>
@@ -1332,28 +1289,6 @@ span.pronounce-wrong {
                     <h2>即時庫存</h2>
                     <p id="portfolioDate" style="margin-bottom:2px;">您的個人投資組合</p>
                     <p id="portfolioClock" style="font-size:14px; color:var(--text-secondary);">&nbsp;</p>
-                    <div style="margin-top:4px;">
-                        <p style="font-size:14px; color:var(--text-secondary); margin:0; display:flex; align-items:center;">
-                            <select id="citySelector" style="background:transparent; border:none; color:#f8fafc; font-size:14px; padding:0; margin:0; outline:none; cursor:pointer; font-weight:bold; font-family:inherit; -webkit-appearance:none; appearance:none; width:4.5em;">
-                                <option value="彰化,24.08,120.54">彰化市</option>
-                                <option value="臺北,25.04,121.51">臺北市</option>
-                                <option value="新北,25.01,121.46">新北市</option>
-                                <option value="桃園,24.99,121.31">桃園市</option>
-                                <option value="臺中,24.14,120.67">臺中市</option>
-                                <option value="臺南,22.99,120.21">臺南市</option>
-                                <option value="高雄,22.62,120.31">高雄市</option>
-                                <option value="基隆,25.13,121.74">基隆市</option>
-                                <option value="新竹,24.81,120.97">新竹市</option>
-                                <option value="嘉義,23.48,120.45">嘉義市</option>
-                                <option value="宜蘭,24.75,121.75">宜蘭縣</option>
-                                <option value="花蓮,23.98,121.61">花蓮縣</option>
-                                <option value="臺東,22.75,121.15">臺東縣</option>
-                                <option value="屏東,22.67,120.49">屏東縣</option>
-                            </select>
-                            <span id="portfolioWeatherMain" style="margin:0; padding:0;">載入中...</span>
-                        </p>
-                        <p id="portfolioWeatherAQI" style="font-size:14px; color:var(--text-secondary); margin-top:1px;"></p>
-                    </div>
                 </div>
                 <div style="display:flex; gap:10px; align-items:center;">
                     <button id="toggleViewBtn" class="btn secondary-btn" style="background:rgba(139, 92, 246, 0.2); border-color:rgba(139, 92, 246, 0.5); color:#c4b5fd;">⇄ 切換至短期操作</button>
@@ -1392,62 +1327,55 @@ span.pronounce-wrong {
                     <span class="label">淨總資產</span>
                     <span class="value" id="totalAssetValue" style="color:#60a5fa;">0</span>
                 </div>
-                <div style="display:flex; gap:10px; flex-basis:100%; margin-top:4px; flex-wrap:wrap;">
-                    <!-- 左卡: 總未實現損益 (左) | 總付出成本 (右) -->
-                    <div class="dashboard-card" style="flex:1; min-width:150px;">
-                        <div class="card-inner-split" style="display:flex; gap:8px;">
-                            <div style="flex:1; display:flex; flex-direction:column;">
-                                <span class="label">總未實現損益</span>
-                                <span class="value" id="totalInventoryProfit" style="margin:2px 0;">0</span>
-                                <span id="totalInventoryProfitRate" style="font-size:14px; font-weight:700;">0.00%</span>
+                <div style="display:flex; gap:16px; flex-basis:100%; margin-top:4px; flex-wrap:wrap;">
+                    <div class="dashboard-card" style="flex:1; min-width:160px;">
+                        <span class="label">總未實現損益</span>
+                        <span class="value" id="totalInventoryProfit">0</span>
+                        <span id="totalInventoryProfitRate"
+                            style="font-size:14px; font-weight:700; margin-top:2px;">0.00%</span>
+                    </div>
+                    <div class="dashboard-card" style="flex:1; min-width:160px;">
+                        <span class="label">總付出成本</span>
+                        <span class="value" id="totalInventoryCost">0</span>
+                    </div>
+                    <div class="dashboard-card"
+                        style="flex:1; min-width:180px; display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+                        <div>
+                            <span class="label" style="display:block; margin-bottom:4px;">當年度已實現損益</span>
+                            <div style="display:flex; align-items:center;">
+                                <span class="value-prefix compact" style="margin-right:4px;">$</span>
+                                <input type="number" id="yearlyRealizedInput" value="0" step="1"
+                                    class="value-input compact">
                             </div>
-                            <div style="width:1px; background:rgba(255,255,255,0.1); margin:2px 0;"></div>
-                            <div style="flex:1; display:flex; flex-direction:column;">
-                                <span class="label">總付出成本</span>
-                                <span class="value" id="totalInventoryCost" style="margin:2px 0;">0</span>
+                        </div>
+                        <div style="border-top:1px dashed rgba(255,255,255,0.1); padding-top:10px;">
+                            <span class="label" style="display:block; margin-bottom:4px;">總投資已實現損益</span>
+                            <div style="display:flex; align-items:center;">
+                                <span class="value-prefix compact" style="margin-right:4px;">$</span>
+                                <input type="number" id="totalRealizedInput" value="0" step="1"
+                                    class="value-input compact">
                             </div>
                         </div>
                     </div>
-                    <!-- 右卡: 領息三欄 (上) + 當年度/總投資並排 (下) -->
-                    <div class="dashboard-card" style="flex:1; min-width:180px; display:flex; flex-direction:column; gap:6px;">
-                        <div class="dividend-grid" style="display:flex; gap:6px;">
-                            <div style="flex:1;">
-                                <span class="label">年度總領配息</span>
-                                <div style="display:flex; align-items:center;">
-                                    <span class="value-prefix compact" style="margin-right:2px; font-size:11px;">$</span>
-                                    <input type="text" id="totalDividendVal" class="value-input compact" style="width:100%; font-size:16px;" value="0" inputmode="numeric">
-                                </div>
-                            </div>
-                            <div style="flex:1;">
-                                <span class="label">可抵扣稅額</span>
-                                <div style="display:flex; align-items:center;">
-                                    <span class="value-prefix compact" style="margin-right:2px; font-size:11px;">$</span>
-                                    <input type="text" id="dividendTaxOffsetVal" class="value-input compact" style="width:100%; font-size:16px;" value="0" inputmode="numeric">
-                                </div>
-                            </div>
-                            <div style="flex:1;">
-                                <span class="label">合計</span>
-                                <div style="display:flex; align-items:center;">
-                                    <span class="value-prefix compact" style="margin-right:2px; font-size:11px;">$</span>
-                                    <input type="text" id="dividendTotalBenefitVal" class="value-input compact" style="width:100%; font-size:16px;" value="0" inputmode="numeric">
-                                </div>
-                            </div>
+                </div>
+                <div class="dashboard-card"
+                    style="flex-basis: 100%; margin-top: 10px; background: rgba(16, 185, 129, 0.1); border: 1px dashed rgba(16, 185, 129, 0.3);">
+                    <span class="label">年度領息總結</span>
+                    <div style="display:flex; justify-content:space-between; margin-top: 8px;">
+                        <div style="display:flex; flex-direction:column;">
+                            <span style="font-size:12px; color:var(--text-secondary);">年度總領配息</span>
+                            <span class="value-unified" style="color:var(--text-primary);"
+                                id="totalDividendVal">0</span>
                         </div>
-                        <div class="realized-grid" style="border-top:1px dashed rgba(255,255,255,0.1); padding-top:5px; display:flex; gap:6px;">
-                            <div style="flex:1;">
-                                <span class="label">當年度已實現損益</span>
-                                <div style="display:flex; align-items:center;">
-                                    <span class="value-prefix compact" style="margin-right:2px; font-size:11px;">$</span>
-                                    <input type="number" id="yearlyRealizedInput" value="0" step="1" class="value-input compact" style="width:100%; font-size:16px;">
-                                </div>
-                            </div>
-                            <div style="flex:1;">
-                                <span class="label">總投資已實現損益</span>
-                                <div style="display:flex; align-items:center;">
-                                    <span class="value-prefix compact" style="margin-right:2px; font-size:11px;">$</span>
-                                    <input type="number" id="totalRealizedInput" value="0" step="1" class="value-input compact" style="width:100%; font-size:16px;">
-                                </div>
-                            </div>
+                        <div style="display:flex; flex-direction:column;">
+                            <span style="font-size:12px; color:var(--text-secondary);">8.5%抵扣稅額</span>
+                            <span class="value-unified" style="color:#fff;"
+                                id="dividendTaxOffsetVal">0</span>
+                        </div>
+                        <div style="display:flex; flex-direction:column; text-align:right;">
+                            <span style="font-size:12px; color:var(--text-secondary);">額外領息總額結算</span>
+                            <span class="value-unified" style="color:#fff;"
+                                id="dividendTotalBenefitVal">0</span>
                         </div>
                     </div>
                 </div>
@@ -1461,7 +1389,6 @@ span.pronounce-wrong {
                 尚未加入任何庫存<br><span style="font-size:12px;opacity:0.6;">在左側計算完畢後，點擊「加到我的庫存」</span>
             </div>
             </div>
-
 
             <!-- 短期操作視圖 -->
             <div id="shortTermView" style="display:none; flex-direction:column; flex-grow:1; flex-shrink:1; min-height:0;">
@@ -1710,9 +1637,6 @@ span.pronounce-wrong {
             <div style="display:flex; justify-content:center; gap:8px; margin-bottom: 8px; flex-wrap:wrap;">
                 <button id="tabFlashcardBtn" class="btn primary-btn" style="width:auto; padding:8px 20px;">🗂️ 單字卡</button>
                 <button id="tabArticleBtn" class="btn secondary-btn" style="width:auto; padding:8px 20px;">📖 短文閱讀</button>
-                <button id="tabDictionaryBtn" class="btn secondary-btn" style="width:auto; padding:8px 20px;">🔍 查字典</button>
-                <button id="tabLongArticleBtn" class="btn secondary-btn" style="width:auto; padding:8px 20px;">📚 長篇小說</button>
-                <button id="tabWritingBtn" class="btn secondary-btn" style="width:auto; padding:8px 20px;">✍️ 寫作區</button>
                 <button id="tabGamesBtn" class="btn secondary-btn" style="width:auto; padding:8px 20px; background:rgba(139,92,246,0.2); border-color:rgba(139,92,246,0.5); color:#c4b5fd;">🎮 益智遊戲</button>
             </div>
 
@@ -1835,71 +1759,6 @@ span.pronounce-wrong {
                 <div id="articleScorePanel" class="glass-panel" style="display:none; background: rgba(0,0,0,0.3); padding: 20px; border:1px solid rgba(255,255,255,0.05); text-align:left;">
                     <h4 style="color:#34d399; margin-bottom:12px;">🎙️ 發音評分結果 (<span id="articleScoreVal">0</span>%)</h4>
                     <p id="articleRecordResult" style="font-size:15px; line-height:1.8; color:#94a3b8;"></p>
-                </div>
-            </div>
-
-            <!-- 🔍 查字典模式區塊 -->
-            <div id="dictionarySection" style="display:none; flex-direction:column; gap:16px;">
-                <div style="display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
-                    <div style="flex:1; display:flex; gap:4px; min-width:200px;">
-                        <input type="text" id="dictSearchInputMain" placeholder="輸入單字查字典..." class="input-field" style="background:rgba(0,0,0,0.3); border-color:rgba(59,130,246,0.3);">
-                        <button id="dictSearchBtnMain" class="btn primary-btn" style="white-space:nowrap;">🔍 查詢</button>
-                    </div>
-                </div>
-                <div id="dictResultCardMain" style="display:none; background:rgba(0,0,0,0.3); border-radius:12px; padding:16px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                        <h3 id="dictWordTitleMain" style="color:#60a5fa; font-size:22px;"></h3>
-                        <button id="dictPlayBtnMain" class="btn secondary-btn" style="padding:6px 14px;">🔊 發音</button>
-                    </div>
-                    <p id="dictPhoneticMain" style="color:#94a3b8; margin-bottom:12px;"></p>
-                    <div id="dictDefsContainerMain"></div>
-                </div>
-            </div>
-
-            <!-- 📚 長篇小說區塊 -->
-            <div id="longArticleSection" style="display:none; flex-direction:column; gap:16px;">
-                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-                    <select id="longArticleSelect" class="input-field" style="flex:1; min-width:200px; background:rgba(0,0,0,0.3); color:#e2e8f0;"></select>
-                    <button id="playLongArticleBtn" class="btn primary-btn" style="padding:8px 16px;">▶️ 朗讀本章</button>
-                    <button id="pauseLongArticleBtn" class="btn secondary-btn" style="padding:8px 16px;">⏸ 暫停</button>
-                    <button id="stopLongArticleBtn" class="btn secondary-btn" style="padding:8px 16px;">⏹ 停止</button>
-                </div>
-                <div style="background:rgba(0,0,0,0.2); border-radius:12px; padding:20px; max-height:65vh; overflow-y:auto;">
-                    <div id="longArticleContent" style="font-size:16px; line-height:1.8; color:#e2e8f0; white-space:pre-wrap;"></div>
-                </div>
-            </div>
-
-            <!-- ✍️ 英文寫作區 -->
-            <div id="writingSection" style="display:none; flex-direction:column; gap:16px;">
-                <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; background:rgba(0,0,0,0.2); padding:10px 16px; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
-                    <label style="color:#94a3b8; font-size:14px;">🔑 Gemini API Key (僅供 AI 深度潤飾使用)：</label>
-                    <input type="password" id="geminiApiKeyInput" class="input-field" placeholder="輸入 API Key..." style="max-width:200px; padding:6px 12px; background:rgba(0,0,0,0.5);">
-                    <button id="saveApiKeyBtn" class="btn primary-btn" style="padding:6px 14px; font-size:13px;">儲存</button>
-                    <a href="https://aistudio.google.com/apikey" target="_blank" style="color:#60a5fa; font-size:13px; text-decoration:underline;">免費申請 →</a>
-                </div>
-                <div style="display:flex; gap:16px; flex-wrap:wrap;">
-                    <div class="glass-panel" style="flex:2; padding:20px; border-radius:16px; min-width:280px; background:rgba(255,255,255,0.02);">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                            <h3 style="color:#fcd34d; font-size:18px;">📝 撰寫文章</h3>
-                            <span id="writingCharCount" style="color:#94a3b8; font-size:12px;">字數: 0</span>
-                        </div>
-                        <textarea id="writingTextarea" class="input-field" placeholder="在此輸入您的英文文章... (雙擊單字可查字典)" style="width:100%; height:220px; resize:vertical; background:rgba(0,0,0,0.3); color:#e2e8f0; font-size:16px; line-height:1.6; padding:12px; margin-bottom:12px;"></textarea>
-                        <div style="display:flex; flex-wrap:wrap; gap:10px;">
-                            <button id="aiGradeBtn" class="btn primary-btn" style="padding:8px 16px; background:rgba(52,211,153,0.2); border-color:rgba(52,211,153,0.5); color:#6ee7b7;">🔍 基本文法檢查 (免Key)</button>
-                            <button id="aiDeepRewriteBtn" class="btn primary-btn" style="padding:8px 16px; background:rgba(245,158,11,0.2); border-color:rgba(245,158,11,0.5); color:#fcd34d;">✨ AI 深度潤飾 (需Key)</button>
-                            <button id="playWritingBtn" class="btn secondary-btn" style="padding:8px 16px;">▶️ 朗讀文章</button>
-                            <button id="saveWritingBtn" class="btn secondary-btn" style="padding:8px 16px; background:rgba(52,211,153,0.2); border-color:rgba(52,211,153,0.5); color:#6ee7b7;">💾 儲存文章</button>
-                            <button id="clearWritingBtn" class="btn secondary-btn" style="padding:8px 16px; color:#fca5a5;">🗑️ 清空</button>
-                        </div>
-                        <div id="aiFeedbackSection" style="display:none; margin-top:20px; padding:16px; border-top:1px solid rgba(255,255,255,0.1);">
-                            <h4 style="color:#60a5fa; margin-bottom:12px;">🤖 分析結果：</h4>
-                            <div id="aiFeedbackContent" style="font-size:15px; line-height:1.7; color:#cbd5e1;"></div>
-                        </div>
-                    </div>
-                    <div class="glass-panel" style="flex:1; padding:20px; border-radius:16px; min-width:230px; max-height:580px; overflow-y:auto; background:rgba(0,0,0,0.2);">
-                        <h3 style="color:#a78bfa; font-size:18px; margin-bottom:16px;">📁 歷史紀錄</h3>
-                        <div id="writingHistoryList" style="display:flex; flex-direction:column; gap:10px;"></div>
-                    </div>
                 </div>
             </div>
 
@@ -2464,25 +2323,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateInputColor(totalRealizedInputEl);
         }
 
-        const totalDividendValEl = document.getElementById('totalDividendVal');
-        const dividendTaxOffsetValEl = document.getElementById('dividendTaxOffsetVal');
-        const dividendTotalBenefitValEl = document.getElementById('dividendTotalBenefitVal');
-        
-        function formatDividendInput(el, rawVal) {
-            const num = parseInt(String(rawVal).replace(/,/g, ''), 10);
-            el.value = isNaN(num) ? '0' : num.toLocaleString('zh-TW');
-        }
-
-        if(totalDividendValEl && localStorage.getItem('twStockTotalDividend')) {
-            formatDividendInput(totalDividendValEl, localStorage.getItem('twStockTotalDividend'));
-        }
-        if(dividendTaxOffsetValEl && localStorage.getItem('twStockDividendTaxOffset')) {
-            formatDividendInput(dividendTaxOffsetValEl, localStorage.getItem('twStockDividendTaxOffset'));
-        }
-        if(dividendTotalBenefitValEl && localStorage.getItem('twStockDividendTotalBenefit')) {
-            formatDividendInput(dividendTotalBenefitValEl, localStorage.getItem('twStockDividendTotalBenefit'));
-        }
-
         const savedCapital = localStorage.getItem('twStockShortTermCapital');
         if (savedCapital && shortTermCapitalInput) {
             shortTermCapitalInput.value = savedCapital;
@@ -2669,38 +2509,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Network helper for CORS Proxies ---
     async function fetchWithProxy(targetUrl, isJson = false) {
         const proxies = [
-            // allorigins - supports null origin, wraps in {contents:...}
-            { url: (u) => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`, allorigins: true },
-            // allorigins raw - direct content
-            { url: (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`, allorigins: false },
-            // corsproxy.io
-            { url: (u) => `https://corsproxy.io/?${encodeURIComponent(u)}`, allorigins: false },
-            // thingproxy
-            { url: (u) => `https://thingproxy.freeboard.io/fetch/${u}`, allorigins: false },
-            // codetabs (有流量限制)
-            { url: (u) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`, allorigins: false },
+            (url) => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+            (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+            (url) => `https://corsproxy.io/?${encodeURIComponent(url)}` // or ?url=
         ];
 
-        for (let proxy of proxies) {
-            const proxyUrl = proxy.url(targetUrl);
+        for (let getProxyUrl of proxies) {
+            const proxyUrl = getProxyUrl(targetUrl);
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 15000); // 15秒 timeout
+                const timeoutId = setTimeout(() => controller.abort(), 6000);
                 const res = await fetch(proxyUrl, { signal: controller.signal });
                 clearTimeout(timeoutId);
 
                 if (res.ok) {
-                    if (proxy.allorigins) {
+                    if (proxyUrl.includes('allorigins.win/get')) {
                         const data = await res.json();
-                        if (data && data.contents && data.contents.length > 10) {
+                        if (data && data.contents) {
                             return isJson ? JSON.parse(data.contents) : data.contents;
                         }
                     } else {
-                        const text = await res.text();
-                        // 過濾掉明顯的錯誤回應
-                        if (text && text.length > 10 && !text.startsWith('Edge:') && !text.startsWith('Error')) {
-                            return isJson ? JSON.parse(text) : text;
-                        }
+                        return isJson ? await res.json() : await res.text();
                     }
                 }
             } catch (e) {
@@ -2718,101 +2547,52 @@ document.addEventListener('DOMContentLoaded', () => {
         let anySuccess = false;
         let allItems = [...inventory, ...shortTermInventory];
 
-        // 嚴格的價格驗證函數
-        function validatePrice(raw) {
-            if (raw === null || raw === undefined || raw === '' || raw === '-') return null;
-            const cleaned = String(raw).replace(/,/g, '').replace(/\s/g, '').trim();
-            const num = parseFloat(cleaned);
-            if (isNaN(num) || num <= 0 || num > 100000000) return null; // 異常值過濾
-            return num;
-        }
-
-        // Step 1. 主力：TWSE 官方 API（上市股）先直連，CORS 被擋再用 proxy
+        // 0. Primary official TWSE data (No proxy needed, works for all listed Taiwan stocks)
         let twseMap = {};
         try {
             const twseRes = await fetch('https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL');
             if (twseRes.ok) {
                 const twseData = await twseRes.json();
                 twseData.forEach(dt => {
-                    const p = validatePrice(dt.ClosingPrice);
-                    if (p !== null) twseMap[dt.Code] = p;
-                });
-                console.log(`[TWSE 直連] 載入 ${Object.keys(twseMap).length} 筆收盤價`);
-            }
-        } catch(e) {
-            console.warn('[TWSE 直連] 失敗，改用 proxy:', e.message);
-        }
-        // 直連失敗才走 proxy
-        if (Object.keys(twseMap).length === 0) {
-            try {
-                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL')}`;
-                const r2 = await fetch(proxyUrl);
-                if (r2.ok) {
-                    const wrapper = await r2.json();
-                    const d = JSON.parse(wrapper.contents);
-                    d.forEach(dt => {
-                        const p = validatePrice(dt.ClosingPrice);
-                        if (p !== null) twseMap[dt.Code] = p;
-                    });
-                    console.log(`[TWSE Proxy] 載入 ${Object.keys(twseMap).length} 筆收盤價`);
-                }
-            } catch(e2) {
-                console.warn('[TWSE Proxy] 也失敗:', e2.message);
-            }
-        }
-
-        // Step 2. 備援：TPEx 官方 API（上櫃股）
-        let tpexMap = {};
-        try {
-            const tpexRes = await fetch(`https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes`);
-            if (tpexRes.ok) {
-                const tpexData = await tpexRes.json();
-                tpexData.forEach(dt => {
-                    const p = validatePrice(dt.Close);
-                    if (p !== null && dt.SecuritiesCompanyCode) {
-                        tpexMap[dt.SecuritiesCompanyCode] = p;
+                    if(dt.ClosingPrice) {
+                        twseMap[dt.Code] = parseFloat(String(dt.ClosingPrice).replace(/,/g, ''));
                     }
                 });
-                console.log(`[TPEx] 載入 ${Object.keys(tpexMap).length} 筆上櫃股價`);
             }
         } catch(e) {
-            console.warn('[TPEx] 上櫃 API 失敗:', e);
+            console.warn("TWSE API failed:", e);
         }
 
         for (let item of allItems) {
             let rawSymbol = item.code.trim().replace(/\.TW$/i, '').replace(/\.TWO$/i, '');
-
-            // ── TWSE 查詢 ──
-            if (twseMap[rawSymbol] !== undefined) {
-                const price = twseMap[rawSymbol];
-                console.log(`[TWSE] ${rawSymbol}: ${price} (現價: ${item.currentPrice})`);
-                if (!anySuccess) recordState();
-                item.currentPrice = price;  // 永遠套用最新收盤價
-                anySuccess = true;
-                continue;
+            
+            // Fast track TWSE map lookup
+            if (twseMap[rawSymbol] && !isNaN(twseMap[rawSymbol])) {
+                let price = twseMap[rawSymbol];
+                if (price !== item.currentPrice) {
+                    if (!anySuccess) recordState();
+                    item.currentPrice = price;
+                    anySuccess = true;
+                }
+                continue; // Found it in TWSE, move to next!
             }
 
-            // ── TPEx 查詢 ──
-            if (tpexMap[rawSymbol] !== undefined) {
-                const price = tpexMap[rawSymbol];
-                console.log(`[TPEx] ${rawSymbol}: ${price} (現價: ${item.currentPrice})`);
-                if (!anySuccess) recordState();
-                item.currentPrice = price;  // 永遠套用最新收盤價
-                anySuccess = true;
-                continue;
+            let symbol = item.code.trim();
+            if (/^[a-zA-Z0-9]+$/.test(symbol)) {
+                symbol = `${symbol}.TW`;
+            } else if (!symbol.includes('.')) {
+                symbol = `${symbol}.TW`;
             }
 
-            // ── Yahoo Finance API 備援 ──
-            let symbol = rawSymbol;
-            if (!symbol.includes('.')) symbol = `${symbol}.TW`;
             let fallbackSuccess = false;
 
+            // 1. Yahoo Finance API
             try {
                 const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`;
                 const rawData = await fetchWithProxy(url, true);
-                const price = validatePrice(rawData?.chart?.result?.[0]?.meta?.regularMarketPrice);
-                if (price !== null) {
-                    console.log(`[Yahoo API] ${rawSymbol}: ${price}`);
+                
+                const price = rawData.chart.result[0].meta.regularMarketPrice;
+                if (price) {
                     if (price !== item.currentPrice) {
                         if (!anySuccess) recordState();
                         item.currentPrice = price;
@@ -2820,50 +2600,72 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     fallbackSuccess = true;
                 } else {
-                    throw new Error('Yahoo API 無有效價格');
+                    throw new Error('Yahoo proxy returned no price');
                 }
             } catch (err) {
-                console.warn(`[Yahoo API] ${rawSymbol} 失敗:`, err.message);
+                console.warn('Yahoo API error for', symbol, '- Trying Yahoo TW HTML...');
             }
 
-            // ── Yahoo TW HTML 備援 ──
+            // 2. Yahoo TW HTML (very reliable for TW stocks)
             if (!fallbackSuccess) {
                 try {
+                    const rawSymbol = item.code.trim();
                     const twUrl = `https://tw.stock.yahoo.com/quote/${rawSymbol}`;
                     const html = await fetchWithProxy(twUrl, false);
+                    
+                    let priceValue = null;
                     if (html) {
-                        const patterns = [
-                            /\"regularMarketPrice\":\{\"raw\":([\d\.]+)/,
-                            /\"currentPrice\":([\d\.]+)/,
-                            /\(32px\)[^>]*>([\d,\.]+)<\/span>/
-                        ];
-                        let priceValue = null;
-                        for (const pat of patterns) {
-                            const m = html.match(pat);
-                            if (m?.[1]) {
-                                priceValue = validatePrice(m[1]);
-                                if (priceValue !== null) break;
-                            }
-                        }
-                        if (priceValue !== null) {
-                            console.log(`[Yahoo HTML] ${rawSymbol}: ${priceValue}`);
-                            if (priceValue !== item.currentPrice) {
-                                if (!anySuccess) recordState();
-                                item.currentPrice = priceValue;
-                                anySuccess = true;
-                            }
-                            fallbackSuccess = true;
-                        } else {
-                            throw new Error('Yahoo TW HTML 無有效價格');
+                        const m = html.match(/"currentPrice":([\d\.,]+)/) || html.match(/"regularMarketPrice":\{"raw":([\d\.,]+)/) || html.match(/<span[^>]*Fz\(32px\)[^>]*>([\d\.,]+)<\/span>/);
+                        if (m && m[1]) {
+                            priceValue = window.parseFloat(String(m[1]).replace(/,/g, ''));
                         }
                     }
+                    if (priceValue !== null && !isNaN(priceValue)) {
+                        if (priceValue !== item.currentPrice) {
+                            if (!anySuccess) recordState();
+                            item.currentPrice = priceValue;
+                            anySuccess = true;
+                        }
+                        fallbackSuccess = true;
+                    } else {
+                        throw new Error('Yahoo TW HTML parsed no price');
+                    }
                 } catch(yhErr) {
-                    console.warn(`[Yahoo HTML] ${rawSymbol} 失敗:`, yhErr.message);
+                    console.warn('Yahoo TW HTML error for', item.code, '- Trying CMoney...');
                 }
             }
 
+            // 3. CMoney HTML
             if (!fallbackSuccess) {
-                console.error(`[全部失敗] ${rawSymbol} 無法取得股價，保留原值 ${item.currentPrice}`);
+                try {
+                    const rawSymbol = item.code.trim();
+                    const cmUrl = `https://www.cmoney.tw/finance/twstock/${rawSymbol}`;
+                    const html = await fetchWithProxy(cmUrl, false);
+                    
+                    let priceValue = null;
+                    if (html) {
+                        let mDesc = html.match(/成交價[^\d]*([\d\.,]+)/);
+                        let mProps = html.match(/itemprop="price"[^>]*>([\d\.,]+)/i);
+                        let mJson = html.match(/"price"\s*:\s*([\d\.,]+)/i);
+                        
+                        if (mDesc && mDesc[1]) priceValue = window.parseFloat(String(mDesc[1]).replace(/,/g, ''));
+                        else if (mProps && mProps[1]) priceValue = window.parseFloat(String(mProps[1]).replace(/,/g, ''));
+                        else if (mJson && mJson[1]) priceValue = window.parseFloat(String(mJson[1]).replace(/,/g, ''));
+                    }
+                    
+                    if (priceValue !== null && !isNaN(priceValue)) {
+                        if (priceValue !== item.currentPrice) {
+                            if (!anySuccess) recordState();
+                            item.currentPrice = priceValue;
+                            anySuccess = true;
+                        }
+                        fallbackSuccess = true;
+                    } else {
+                        throw new Error('CMoney HTML parsed no price');
+                    }
+                } catch(cmErr) {
+                    console.error('All fallbacks failed for', item.code, cmErr.message);
+                }
             }
         }
 
@@ -2879,7 +2681,7 @@ document.addEventListener('DOMContentLoaded', () => {
         refreshPricesBtn.disabled = false;
         
         if (!anySuccess && allItems.length > 0) {
-            alert('抓取完成：目前可能因為網路或股票代號問題無法取得最新現價。如有需要請手動更新。');
+            alert('抓取完成：目前可能因為網路或代號問題無法取得最新現價。如有需要請手動更新。');
         }
     }
 
@@ -2961,38 +2763,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="inv-body" style="grid-template-columns: 1fr 1fr 1.2fr;">
                     <div class="inv-stat">
-                        <span style="color:var(--text-secondary);">現在價格</span>
+                        <span style="font-size:12px; color:var(--text-secondary);">現在價格</span>
                         <div style="display:flex; align-items:center;">
-                            <span style="color:#60a5fa; font-weight:600; font-size:20px;">$</span>
+                            <span style="color:#60a5fa; font-weight:600; font-size:18px;">$</span>
                             <input type="number" step="0.01" min="0" value="${item.currentPrice}" data-id="${item.id}" class="live-price-input" style="font-size:20px; font-weight:600; width:100%; background:transparent; border:none; color:#60a5fa; outline:none; padding:0;" title="即時股價">
                         </div>
                     </div>
                     <div class="inv-stat">
-                        <span>股票市值</span>
-                        <div style="display:flex; align-items:center;">
-                            <span style="font-size:20px; font-weight:600; color:#f8fafc; margin-right:2px;">$</span>
-                            <span style="font-size:20px; font-weight:600; color:#f8fafc;">${formatCurrency(totalRevenue)}</span>
-                        </div>
+                        <span style="font-size:12px; color:var(--text-secondary);">股票市值</span>
+                        <span style="font-size:20px; font-weight:600; color:#f8fafc;">$${formatCurrency(totalRevenue)}</span>
                     </div>
                     <div class="inv-stat input-stat">
                         <label>已領配息總額</label>
                         <div style="display:flex; align-items:center;">
-                            <span style="margin-right:2px; font-size:20px; font-weight:600; color:var(--text-primary);">$</span>
-                            <input type="number" step="1" min="0" value="${item.dividend}" data-id="${item.id}" class="live-dividend-input" style="outline:none;">
+                            <span style="margin-right:2px; font-size:16px; color:var(--text-primary);">$</span>
+                            <input type="number" step="1" min="0" value="${item.dividend}" data-id="${item.id}" class="live-dividend-input" style="color:var(--text-primary); background:transparent; padding-left:0; outline:none;">
                         </div>
                     </div>
                     <div class="inv-stat">
-                        <span>平均成本</span>
-                        <div style="display:flex; align-items:center;">
-                            <span style="font-size:20px; font-weight:600; color:var(--text-primary); margin-right:2px;">$</span>
-                            <span style="font-size:20px; font-weight:600; color:var(--text-primary);">${formatCurrency(item.unitCost, true)}</span>
-                        </div>
+                        <span style="font-size:12px; color:var(--text-secondary);">平均成本</span>
+                        <span style="font-size:18px; font-weight:500; color:var(--text-primary); margin-top:2px;">$ ${formatCurrency(item.unitCost, true)}</span>
                     </div>
                     <div class="inv-stat input-stat">
                         <label>買進總金額</label>
                         <div style="display:flex; align-items:center;">
-                            <span style="margin-right:2px; font-size:20px; font-weight:600; color:var(--text-primary);">$</span>
-                            <input type="number" step="1" min="0" value="${item.totalCost}" data-id="${item.id}" class="live-cost-input" style="outline:none;">
+                            <span style="margin-right:2px; font-size:16px; color:var(--text-primary);">$</span>
+                            <input type="number" step="1" min="0" value="${item.totalCost}" data-id="${item.id}" class="live-cost-input" style="color:var(--text-primary); background:transparent; padding-left:0; outline:none;">
                         </div>
                     </div>
                 </div>
@@ -3005,8 +2801,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span>總資產 ${assetRatio.toFixed(1)}%</span>
                         </div>
                     </div>
-                    <div style="display:flex; flex-direction:row; gap:8px; align-items:center; justify-content:flex-end;">
-                        <button class="btn-analyze" data-code="${item.code}" data-name="${item.name}" data-avg-cost="${item.unitCost}" style="padding:4px 12px; font-size:12px; background:transparent; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:6px; cursor:pointer;">分析</button>
+                    <div style="display:flex; flex-direction:column; align-items:flex-end; justify-content:center;">
                         <button class="btn-delete" data-id="${item.id}" style="padding:4px 12px; font-size:12px;">刪除</button>
                     </div>
                 </div>
@@ -3051,7 +2846,18 @@ document.addEventListener('DOMContentLoaded', () => {
             totalInventoryCostEl.textContent = formatCurrency(totalCostAll);
         }
 
-        // Annual dividend inputs are now manually editable and not auto-calculated.
+        const totalDividendValEl = document.getElementById('totalDividendVal');
+        const dividendTaxOffsetValEl = document.getElementById('dividendTaxOffsetVal');
+        const dividendTotalBenefitValEl = document.getElementById('dividendTotalBenefitVal');
+
+        if (totalDividendValEl) {
+            let taxOffset = Math.floor(totalDividendAll * 0.085);
+            let dividendTotalBenefit = totalDividendAll + taxOffset;
+            
+            totalDividendValEl.textContent = formatCurrency(totalDividendAll);
+            dividendTaxOffsetValEl.textContent = formatCurrency(taxOffset);
+            dividendTotalBenefitValEl.textContent = formatCurrency(dividendTotalBenefit);
+        }
 
         // Bind events to new elements
         document.querySelectorAll('.live-price-input').forEach(input => {
@@ -3222,8 +3028,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="inv-result-val ${profitClass}">${profitStr}</span>
                         <span class="inv-result-rate ${profitClass}">${rateStr}</span>
                     </div>
-                    <div style="display:flex; flex-direction:row; gap:8px; align-items:center; justify-content:flex-end;">
-                        <button class="btn-analyze" data-code="${item.code}" data-name="${item.name}" data-avg-cost="${item.unitCost}" style="padding:4px 12px; font-size:12px; background:transparent; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:6px; cursor:pointer;">分析</button>
+                    <div style="display:flex; flex-direction:column; align-items:flex-end; justify-content:center;">
                         <button class="btn-delete-st" data-id="${item.id}" style="padding:4px 12px; font-size:12px;">刪除</button>
                     </div>
                 </div>
@@ -3495,25 +3300,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateInputColor(totalRealizedInputEl);
         });
     }
-
-    // --- 三欄領息輸入框：千分位格式化 ---
-    function bindDividendFormatting(el, storageKey) {
-        if (!el) return;
-        el.addEventListener('focus', () => {
-            // 聚焦時還原純數字，方便輸入
-            el.value = el.value.replace(/,/g, '');
-        });
-        el.addEventListener('blur', () => {
-            recordState();
-            const raw = parseInt(el.value.replace(/,/g, ''), 10);
-            const safeVal = isNaN(raw) ? 0 : raw;
-            el.value = safeVal.toLocaleString('zh-TW');
-            localStorage.setItem(storageKey, String(safeVal));
-        });
-    }
-    bindDividendFormatting(document.getElementById('totalDividendVal'),      'twStockTotalDividend');
-    bindDividendFormatting(document.getElementById('dividendTaxOffsetVal'),  'twStockDividendTaxOffset');
-    bindDividendFormatting(document.getElementById('dividendTotalBenefitVal'),'twStockDividendTotalBenefit');
     
     // --- Daily Stats Logic ---
     async function logDailyStats() {
@@ -3771,120 +3557,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     setInterval(updateDateDisplay, 1000);
-
-    async function fetchWeather() {
-        const elMain = document.getElementById('portfolioWeatherMain');
-        const elAqi  = document.getElementById('portfolioWeatherAQI');
-        const citySelector = document.getElementById('citySelector');
-        if (!elMain || !elAqi || !citySelector) return;
-        
-        const [cityName, lat, lon] = citySelector.value.split(',');
-        
-        // --- 1. 抓取氣溫 (Open-Meteo) ---
-        let weatherStr = '更新中';
-        let temp = '--';
-        try {
-            const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&t=` + Date.now());
-            if (weatherRes.ok) {
-                const weatherData = await weatherRes.json();
-                temp = weatherData.current.temperature_2m;
-                const code = weatherData.current.weather_code;
-                weatherStr = '晴天';
-                if ([1,2,3].includes(code)) weatherStr = '多雲';
-                else if ([45,48].includes(code)) weatherStr = '霧';
-                else if ([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code)) weatherStr = '雨天';
-                else if ([71,73,75,77,85,86].includes(code)) weatherStr = '雪天';
-                else if ([95,96,99].includes(code)) weatherStr = '雷雨';
-            }
-        } catch(e) {}
-        elMain.innerHTML = `${weatherStr}${temp}°C`;
-
-        // --- 2. 抓取 AQI (多重備援) ---
-        let aqi = '--';
-        let aqiStatus = '待更新';
-        let success = false;
-
-        // A. 環境部 MoENV
-        try {
-            const aqiRes = await fetch(`https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1&format=JSON&filters=sitename,EQ,${cityName}&t=` + Date.now());
-            if (aqiRes.ok) {
-                const aqiData = await aqiRes.json();
-                if (aqiData.records && aqiData.records.length > 0) {
-                    aqi = aqiData.records[0].aqi;
-                    aqiStatus = aqiData.records[0].status;
-                    success = true;
-                }
-            }
-        } catch(e) {}
-
-        // B. 如果 A 失敗，嘗試 Open-Meteo (備援 1)
-        if (!success) {
-            try {
-                const backupAqiRes = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=us_aqi&t=` + Date.now());
-                if (backupAqiRes.ok) {
-                    const backupData = await backupAqiRes.json();
-                    aqi = backupData.current.us_aqi;
-                    aqiStatus = aqi > 150 ? '不健康' : (aqi > 100 ? '敏感不佳' : (aqi > 50 ? '普通' : '良好'));
-                    success = true;
-                }
-            } catch(e) {}
-        }
-
-        // C. 如果 B 也失敗，嘗試 WAQI (備援 2)
-        if (!success) {
-            try {
-                const waqiRes = await fetch(`https://api.waqi.info/feed/geo:${lat};${lon}/?token=demo&t=` + Date.now());
-                if (waqiRes.ok) {
-                    const waqiData = await waqiRes.json();
-                    if (waqiData.status === 'ok') {
-                        aqi = waqiData.data.aqi;
-                        const v = parseInt(aqi);
-                        aqiStatus = v > 150 ? '不健康' : (v > 100 ? '敏感不佳' : (v > 50 ? '普通' : '良好'));
-                        success = true;
-                    }
-                }
-            } catch(e) {}
-        }
-
-        // --- 3. 更新 UI ---
-        const updateTime = new Date().toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit' });
-        elAqi.innerHTML = `AQI: ${aqi} (${aqiStatus}) <span style="font-size:10px; opacity:0.6; margin-left:4px;">${updateTime}</span>`;
-        
-        if (!success) setTimeout(fetchWeather, 60000);
-    }
-
-    // Initialize Weather & City Selector
-    const citySelector = document.getElementById('citySelector');
-    if (citySelector) {
-        // 動態調整 select 寬度以適應城市名稱長度
-        function resizeCitySelector() {
-            const text = citySelector.options[citySelector.selectedIndex].text;
-            const tempSpan = document.createElement('span');
-            tempSpan.style.visibility = 'hidden';
-            tempSpan.style.position = 'absolute';
-            tempSpan.style.whiteSpace = 'nowrap';
-            tempSpan.style.font = window.getComputedStyle(citySelector).font;
-            tempSpan.textContent = text;
-            document.body.appendChild(tempSpan);
-            citySelector.style.width = (tempSpan.getBoundingClientRect().width + 2) + 'px';
-            document.body.removeChild(tempSpan);
-        }
-
-        citySelector.addEventListener('change', () => {
-            resizeCitySelector();
-            fetchWeather();
-            localStorage.setItem('twStockPreferredCity', citySelector.value);
-        });
-        
-        const savedCity = localStorage.getItem('twStockPreferredCity');
-        if (savedCity) citySelector.value = savedCity;
-        
-        // 初次加載時調整寬度
-        setTimeout(resizeCitySelector, 100);
-    }
-
-    fetchWeather();
-    setInterval(fetchWeather, 1800000); // 每 30 分鐘更新一次
 
     // --- Accounting Logic ---
     function formatAccDateLabel(d) {
@@ -5098,33 +4770,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ── Tab switching ────────────────────────────────────────
         tabGamesBtn.addEventListener('click', () => {
-            if (gamesSection.style.display === 'flex') {
-                gamesSection.style.display = 'none';
-                tabGamesBtn.classList.remove('active-tab');
-                tabGamesBtn.style.background = 'rgba(139,92,246,0.2)';
-                tabGamesBtn.style.color = '#c4b5fd';
-            } else {
-                gamesSection.style.display = 'flex';
-                tabGamesBtn.classList.add('active-tab');
-                tabGamesBtn.style.background = 'rgba(139,92,246,0.5)';
-                tabGamesBtn.style.color = '#fff';
-                renderGameMenu();
-                setTimeout(() => gamesSection.scrollIntoView({behavior: 'smooth', block: 'start'}), 100);
-            }
+            tabGamesBtn.classList.add('active-tab');
+            tabFlashcardBtn2.classList.replace('primary-btn','secondary-btn');
+            tabArticleBtn2.classList.replace('primary-btn','secondary-btn');
+            tabFlashcardBtn2.classList.remove('active-tab');
+            tabArticleBtn2.classList.remove('active-tab');
+            flashcardSection2.style.display = 'none';
+            articleSection2.style.display   = 'none';
+            gamesSection.style.display      = 'flex';
+            renderGameMenu();
         });
 
-        tabFlashcardBtn2.addEventListener('click', () => { 
-            tabGamesBtn.classList.remove('active-tab'); 
-            gamesSection.style.display='none'; 
-            tabGamesBtn.style.background = 'rgba(139,92,246,0.2)';
-            tabGamesBtn.style.color = '#c4b5fd';
-        });
-        tabArticleBtn2.addEventListener('click',   () => { 
-            tabGamesBtn.classList.remove('active-tab'); 
-            gamesSection.style.display='none'; 
-            tabGamesBtn.style.background = 'rgba(139,92,246,0.2)';
-            tabGamesBtn.style.color = '#c4b5fd';
-        });
+        tabFlashcardBtn2.addEventListener('click', () => { tabGamesBtn.classList.remove('active-tab'); gamesSection.style.display='none'; });
+        tabArticleBtn2.addEventListener('click',   () => { tabGamesBtn.classList.remove('active-tab'); gamesSection.style.display='none'; });
 
         backToGameMenuBtn.addEventListener('click', () => {
             cleanupCurrentGame();              // 清除計時器等殘留
@@ -6969,410 +6627,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.showFloatDict = showPopup;
     })();
 
-        // ======== DICTIONARY TAB ========
-    (function() {
-        const tabDictionaryBtn = document.getElementById('tabDictionaryBtn');
-        const dictionarySection = document.getElementById('dictionarySection');
-        const flashcardSection  = document.getElementById('flashcardSection');
-        const articleSection    = document.getElementById('articleSection');
-        const longArticleSection= document.getElementById('longArticleSection');
-        const writingSection    = document.getElementById('writingSection');
-        const gamesSection      = document.getElementById('gamesSection');
-        const tabFlashcardBtn   = document.getElementById('tabFlashcardBtn');
-        const tabArticleBtn     = document.getElementById('tabArticleBtn');
-        const tabLongArticleBtn = document.getElementById('tabLongArticleBtn');
-        const tabGamesBtn       = document.getElementById('tabGamesBtn');
-        const tabWritingBtn     = document.getElementById('tabWritingBtn');
-
-        function allSections() { return [flashcardSection, articleSection, gamesSection, longArticleSection, writingSection, dictionarySection]; }
-        function allTabBtns()  { return [tabFlashcardBtn, tabArticleBtn, tabGamesBtn, tabLongArticleBtn, tabWritingBtn, tabDictionaryBtn]; }
-        function switchTab(activeSection, activeBtn) {
-            allSections().forEach(s => { if(s) s.style.display = 'none'; });
-            allTabBtns().forEach(b => { 
-                if(b) { 
-                    b.classList.remove('primary-btn'); 
-                    b.classList.add('secondary-btn'); 
-                    b.classList.remove('active-tab');
-                } 
-            });
-            if(tabGamesBtn) {
-                tabGamesBtn.style.background = 'rgba(139,92,246,0.2)';
-                tabGamesBtn.style.color = '#c4b5fd';
-            }
-            if(activeSection) activeSection.style.display = 'flex';
-            if(activeBtn) { activeBtn.classList.remove('secondary-btn'); activeBtn.classList.add('primary-btn'); }
-        }
-
-        if(tabDictionaryBtn) tabDictionaryBtn.addEventListener('click', () => switchTab(dictionarySection, tabDictionaryBtn));
-        if(tabLongArticleBtn) tabLongArticleBtn.addEventListener('click', () => {
-            switchTab(longArticleSection, tabLongArticleBtn);
-            initLongArticle();
-        });
-        if(tabWritingBtn) tabWritingBtn.addEventListener('click', () => {
-            switchTab(writingSection, tabWritingBtn);
-            renderHistoryList();
-        });
-        // Patch existing flashcard and article tabs to also hide new sections
-        if(tabFlashcardBtn) tabFlashcardBtn.addEventListener('click', () => {
-            if(dictionarySection) dictionarySection.style.display = 'none';
-            if(longArticleSection) longArticleSection.style.display = 'none';
-            if(writingSection) writingSection.style.display = 'none';
-            if(tabDictionaryBtn){ tabDictionaryBtn.classList.remove('primary-btn'); tabDictionaryBtn.classList.add('secondary-btn'); }
-            if(tabLongArticleBtn){ tabLongArticleBtn.classList.remove('primary-btn'); tabLongArticleBtn.classList.add('secondary-btn'); }
-            if(tabWritingBtn){ tabWritingBtn.classList.remove('primary-btn'); tabWritingBtn.classList.add('secondary-btn'); }
-        });
-        if(tabArticleBtn) tabArticleBtn.addEventListener('click', () => {
-            if(dictionarySection) dictionarySection.style.display = 'none';
-            if(longArticleSection) longArticleSection.style.display = 'none';
-            if(writingSection) writingSection.style.display = 'none';
-            if(tabDictionaryBtn){ tabDictionaryBtn.classList.remove('primary-btn'); tabDictionaryBtn.classList.add('secondary-btn'); }
-            if(tabLongArticleBtn){ tabLongArticleBtn.classList.remove('primary-btn'); tabLongArticleBtn.classList.add('secondary-btn'); }
-            if(tabWritingBtn){ tabWritingBtn.classList.remove('primary-btn'); tabWritingBtn.classList.add('secondary-btn'); }
-        });
-
-        // ── Dictionary Search ──
-        const dictSearchInput = document.getElementById('dictSearchInputMain');
-        const dictSearchBtn   = document.getElementById('dictSearchBtnMain');
-        const dictResultCard  = document.getElementById('dictResultCardMain');
-        const dictWordTitle   = document.getElementById('dictWordTitleMain');
-        const dictPhonetic    = document.getElementById('dictPhoneticMain');
-        const dictDefsContainer = document.getElementById('dictDefsContainerMain');
-        const dictPlayBtn     = document.getElementById('dictPlayBtnMain');
-
-        async function fetchAndShowWord(word) {
-            if (!word) return;
-            dictResultCard.style.display = 'none';
-            try {
-                const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
-                if (!res.ok) throw new Error('Not found');
-                const data = await res.json();
-                const entry = data[0];
-                dictWordTitle.textContent = entry.word;
-                const phone = entry.phonetics?.find(p => p.text)?.text || '';
-                dictPhonetic.textContent = phone;
-                let html = '';
-                entry.meanings?.forEach(m => {
-                    html += `<div style="margin-bottom:12px;"><b style="color:#a78bfa;">${m.partOfSpeech}</b>`;
-                    m.definitions?.slice(0,3).forEach(d => {
-                        html += `<div style="margin:6px 0 2px 0; color:#e2e8f0;">・${d.definition}</div>`;
-                        if (d.example) html += `<div style="color:#94a3b8; font-size:13px; padding-left:12px;">"${d.example}"</div>`;
-                    });
-                    html += '</div>';
-                });
-                dictDefsContainer.innerHTML = html;
-                dictResultCard.style.display = 'block';
-            } catch(e) {
-                dictDefsContainer.innerHTML = `<p style="color:#f87171;">查無此字：${word}</p>`;
-                dictWordTitle.textContent = word;
-                dictPhonetic.textContent = '';
-                dictResultCard.style.display = 'block';
-            }
-        }
-
-        if (dictSearchBtn) dictSearchBtn.addEventListener('click', () => fetchAndShowWord(dictSearchInput.value.trim()));
-        if (dictSearchInput) dictSearchInput.addEventListener('keydown', e => { if(e.key==='Enter') fetchAndShowWord(dictSearchInput.value.trim()); });
-        if (dictPlayBtn) dictPlayBtn.addEventListener('click', () => {
-            const w = dictWordTitle.textContent;
-            if(!w) return;
-            window.speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(w);
-            u.lang = 'en-US';
-            window.speechSynthesis.speak(u);
-        });
-    })();
-
-    // ======== LONG ARTICLE ========
-    var _longArticleInited = false;
-    function initLongArticle() {
-        if (_longArticleInited) return;
-        _longArticleInited = true;
-        const sel = document.getElementById('longArticleSelect');
-        const content = document.getElementById('longArticleContent');
-        const playBtn = document.getElementById('playLongArticleBtn');
-        const pauseBtn = document.getElementById('pauseLongArticleBtn');
-        const stopBtn = document.getElementById('stopLongArticleBtn');
-        window.longArticleUtterances = [];
-
-        if (!window.LONG_ARTICLES_DB || !sel) return;
-        Object.keys(window.LONG_ARTICLES_DB).forEach(k => {
-            const a = window.LONG_ARTICLES_DB[k];
-            const opt = document.createElement('option');
-            opt.value = k;
-            opt.textContent = a.title || k;
-            sel.appendChild(opt);
-        });
-        function renderArticle() {
-            const a = window.LONG_ARTICLES_DB[sel.value];
-            if (!a || !content) return;
-            if (typeof makeTextClickable === 'function') {
-                content.innerHTML = makeTextClickable(a.text.replace(/\n/g, '<br>'));
-            } else {
-                content.textContent = a.text;
-            }
-        }
-        sel.addEventListener('change', renderArticle);
-        if (Object.keys(window.LONG_ARTICLES_DB).length > 0) renderArticle();
-
-        function speakText(text) {
-            window.speechSynthesis.cancel();
-            window.longArticleUtterances = [];
-            setTimeout(() => {
-                text.split(/\n+/).forEach(p => {
-                    (p.trim().match(/[^.!?]+[.!?]*/g) || [p.trim()]).forEach(s => {
-                        const st = s.trim();
-                        if (st) { const u = new SpeechSynthesisUtterance(st); u.lang='en-US'; window.longArticleUtterances.push(u); window.speechSynthesis.speak(u); }
-                    });
-                });
-            }, 50);
-        }
-        if (playBtn) playBtn.addEventListener('click', () => {
-            if (window.speechSynthesis.paused) { window.speechSynthesis.resume(); return; }
-            const a = window.LONG_ARTICLES_DB[sel.value];
-            if (a) speakText(a.text);
-        });
-        if (pauseBtn) pauseBtn.addEventListener('click', () => window.speechSynthesis.pause());
-        if (stopBtn)  stopBtn.addEventListener('click',  () => { window.speechSynthesis.cancel(); window.longArticleUtterances = []; });
-    }
-
-    // ======== WRITING SECTION ========
-    (function() {
-        const geminiApiKeyInput = document.getElementById('geminiApiKeyInput');
-        const saveApiKeyBtn     = document.getElementById('saveApiKeyBtn');
-        const writingTextarea   = document.getElementById('writingTextarea');
-        const writingCharCount  = document.getElementById('writingCharCount');
-        const aiGradeBtn        = document.getElementById('aiGradeBtn');
-        const aiDeepRewriteBtn  = document.getElementById('aiDeepRewriteBtn');
-        const playWritingBtn    = document.getElementById('playWritingBtn');
-        const saveWritingBtn    = document.getElementById('saveWritingBtn');
-        const clearWritingBtn   = document.getElementById('clearWritingBtn');
-        const aiFeedbackSection = document.getElementById('aiFeedbackSection');
-        const aiFeedbackContent = document.getElementById('aiFeedbackContent');
-        const writingHistoryList= document.getElementById('writingHistoryList');
-        let currentWritingId    = null;
-        window.writingUtterances = [];
-
-        const savedKey = localStorage.getItem('GEMINI_API_KEY');
-        if (savedKey && geminiApiKeyInput) geminiApiKeyInput.value = savedKey;
-
-        if (saveApiKeyBtn) saveApiKeyBtn.addEventListener('click', () => {
-            const k = geminiApiKeyInput.value.trim();
-            if(k) { localStorage.setItem('GEMINI_API_KEY', k); alert('API Key 儲存成功！'); }
-            else  { localStorage.removeItem('GEMINI_API_KEY'); alert('已清除 API Key。'); }
-        });
-
-        if (writingTextarea) {
-            writingTextarea.addEventListener('input', () => {
-                const t = writingTextarea.value.trim();
-                if(writingCharCount) writingCharCount.textContent = '字數: ' + (t ? t.split(/\s+/).length : 0);
-            });
-            writingTextarea.addEventListener('dblclick', () => {
-                const sel = window.getSelection().toString().trim().replace(/[^a-zA-Z'-]/g,'');
-                if (sel) { const inp = document.getElementById('dictSearchInput'); const btn = document.getElementById('dictSearchBtn'); const tab = document.getElementById('tabDictionaryBtn'); if(inp&&btn){inp.value=sel; if(tab)tab.click(); btn.click();} }
-            });
-        }
-        if (clearWritingBtn) clearWritingBtn.addEventListener('click', () => {
-            if(confirm('確定要清空嗎？')) { currentWritingId=null; writingTextarea.value=''; if(writingCharCount) writingCharCount.textContent='字數: 0'; aiFeedbackSection.style.display='none'; aiFeedbackContent.innerHTML=''; }
-        });
-
-        function bindDictClicks(container) {
-            container.querySelectorAll('.clickable-word').forEach(s => {
-                s.addEventListener('click', e => {
-                    const w = e.currentTarget.getAttribute('data-word');
-                    const inp = document.getElementById('dictSearchInput'); const btn = document.getElementById('dictSearchBtn'); const tab = document.getElementById('tabDictionaryBtn');
-                    if(inp&&btn){inp.value=w; if(tab)tab.click(); btn.click();}
-                });
-            });
-        }
-
-        if (aiGradeBtn) aiGradeBtn.addEventListener('click', async () => {
-            const text = writingTextarea.value.trim();
-            if(!text) return alert('請先輸入文章內容！');
-            aiGradeBtn.disabled = true; aiGradeBtn.textContent = '⏳ 分析中...';
-            aiFeedbackSection.style.display = 'block'; aiFeedbackContent.innerHTML = '正在分析文法與拼字，請稍候...';
-            try {
-                const res = await fetch('https://api.languagetool.org/v2/check', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({ text: text, language: 'en-US' })
-                });
-                if(!res.ok) throw new Error('連線到語法檢查伺服器失敗');
-                const data = await res.json();
-                
-                let html = '<div style="font-size: 15px;">';
-                const errors = data.matches;
-                if(errors.length === 0) {
-                    html += '<h3 style="color:#34d399; margin-bottom:12px;">🌟 完美！沒有發現任何文法或拼字錯誤。</h3>';
-                    html += `<div style="color:#cbd5e1; padding: 12px; background:rgba(52,211,153,0.1); border-radius:8px;">整體表現非常優異！</div>`;
-                } else {
-                    const score = Math.max(0, 100 - errors.length * 5);
-                    html += `<h3 style="color:#fbbf24; margin-bottom:8px;">🔍 發現 ${errors.length} 個需要注意的地方</h3>`;
-                    html += `<div style="color:#cbd5e1; padding: 12px; background:rgba(251,191,36,0.1); border-radius:8px; margin-bottom:16px;">預估分數：<b style="font-size:18px;">${score} / 100</b></div>`;
-                    html += '<div style="display:flex; flex-direction:column; gap:12px;">';
-                    errors.forEach(err => {
-                        const bad = text.substring(err.offset, err.offset + err.length);
-                        const reps = err.replacements.slice(0, 3).map(r => `<span class="clickable-word" data-word="${r.value}" style="color:#34d399; font-weight:bold; cursor:pointer;">${r.value}</span>`).join(' 或 ');
-                        html += `<div style="background:rgba(255,255,255,0.03); padding:12px; border-radius:8px; border-left:4px solid #ef4444;">`;
-                        html += `原句片段：<span style="color:#fca5a5; text-decoration:line-through;">${bad}</span><br>`;
-                        if(reps) html += `<div style="margin-top:6px;">建議修改：${reps}</div>`;
-                        html += `<div style="color:#94a3b8; font-size:13px; margin-top:8px;">說明：${err.message}</div>`;
-                        html += `</div>`;
-                    });
-                    html += '</div>';
-                }
-                html += '</div>';
-                aiFeedbackContent.innerHTML = html;
-                bindDictClicks(aiFeedbackContent);
-            } catch(e) {
-                aiFeedbackContent.innerHTML = `<span style="color:#ef4444;">發生錯誤：${e.message}</span>`;
-            } finally {
-                aiGradeBtn.disabled = false; aiGradeBtn.textContent = '🔍 基本文法檢查 (免Key)';
-            }
-        });
-
-        if (aiDeepRewriteBtn) aiDeepRewriteBtn.addEventListener('click', async () => {
-            const text = writingTextarea.value.trim();
-            if(!text) return alert('請先輸入文章內容！');
-            const apiKey = localStorage.getItem('GEMINI_API_KEY');
-            if(!apiKey) return alert('請先在上方輸入並儲存您的 Gemini API Key！\n免費申請：https://aistudio.google.com/apikey');
-            
-            aiDeepRewriteBtn.disabled = true; aiDeepRewriteBtn.textContent = '⏳ 潤飾中...';
-            aiFeedbackSection.style.display = 'block'; aiFeedbackContent.innerHTML = '正在聯絡 AI 進行深度潤飾，請稍候...';
-            
-            const prompt = `You are an expert native American English editor and writing coach. Review the following text.
-Respond in Traditional Chinese (繁體中文).
-Format your response nicely in markdown.
-
-Please provide:
-1. **整體評價 (Overall Feedback)**: A brief, encouraging assessment of the writing style, tone, and flow.
-2. **道地美式改寫 (Native American Rewrite)**: Rewrite the ENTIRE text to sound completely natural, professional, and idiomatic for an American audience.
-3. **句型與語氣解析 (Stylistic Breakdown)**: Highlight 2-3 specific sentences from the original, explain why they sound unnatural or foreign, and explain why your rewritten version is better.
-
-Original Text:
-"${text}"`;
-
-            try {
-                // 1. 動態偵測可用的模型 (解決不同帳號/區域權限的 "model not found" 問題)
-                let modelName = 'models/gemini-1.5-flash';
-                try {
-                    const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
-                    if (listRes.ok) {
-                        const listData = await listRes.json();
-                        const validModels = listData.models.filter(m => m.supportedGenerationMethods?.includes('generateContent'));
-                        // 優先選擇 1.5-flash -> 1.5-pro -> pro -> 任何可用模型
-                        const pref = validModels.find(m => m.name.includes('gemini-1.5-flash')) 
-                                  || validModels.find(m => m.name.includes('gemini-1.5-pro'))
-                                  || validModels.find(m => m.name.includes('gemini-pro'))
-                                  || validModels[0];
-                        if (pref) modelName = pref.name;
-                    }
-                } catch(e) { console.log('ListModels 偵測失敗，使用預設', e); }
-
-                // 2. 使用偵測到的模型發送請求
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/${modelName}:generateContent?key=${apiKey}`, {
-                    method:'POST', headers:{'Content-Type':'application/json'},
-                    body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
-                });
-                
-                if(!res.ok) { 
-                    const err = await res.json(); 
-                    let errMsg = err.error?.message || 'API 錯誤';
-                    if (res.status === 400) errMsg += ' (請求格式錯誤，請檢查 API Key 或輸入內容)';
-                    if (res.status === 401 || res.status === 403) errMsg += ' (API Key 無效或權限不足，請檢查是否填寫正確)';
-                    if (res.status === 429) errMsg += ' (請求次數過多，免費配額可能已達上限)';
-                    throw new Error(errMsg); 
-                }
-                const data = await res.json();
-                let aiText = data.candidates[0].content.parts[0].text;
-                
-                let html = aiText
-                    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-                    .replace(/\n/g, '<br>')
-                    .replace(/\*\*(.*?)\*\*/g, '<b style="color:#fcd34d;">$1</b>')
-                    .replace(/\*(.*?)\*/g, '<i style="color:#a78bfa;">$1</i>')
-                    .replace(/### (.*?)<br>/g, '<h3 style="color:#60a5fa; margin-top:16px; margin-bottom:8px;">$1</h3>')
-                    .replace(/## (.*?)<br>/g, '<h2 style="color:#3b82f6; margin-top:16px; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:4px;">$1</h2>')
-                    .replace(/# (.*?)<br>/g, '<h1 style="color:#3b82f6; margin-top:16px; margin-bottom:8px;">$1</h1>');
-                
-                if(typeof makeTextClickable==='function') html = makeTextClickable(html);
-                aiFeedbackContent.innerHTML = html;
-                bindDictClicks(aiFeedbackContent);
-            } catch(e) {
-                aiFeedbackContent.innerHTML = `
-                    <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:16px; border-radius:8px;">
-                        <h4 style="color:#fca5a5; margin-top:0; margin-bottom:8px;">⚠️ 發生錯誤</h4>
-                        <div style="color:#cbd5e1; font-size:14px;">${e.message}</div>
-                        <div style="color:#94a3b8; font-size:12px; margin-top:12px;">請確認您的 API Key 是否正確。如果仍有問題，請點擊上方連結申請新的 Key。</div>
-                    </div>`;
-            } finally {
-                aiDeepRewriteBtn.disabled = false; aiDeepRewriteBtn.textContent = '✨ AI 深度潤飾 (需Key)';
-            }
-        });
-
-        function speakWriting() {
-            const text = writingTextarea.value.trim(); if(!text) return;
-            if(window.speechSynthesis.paused){window.speechSynthesis.resume();return;}
-            window.speechSynthesis.cancel(); window.writingUtterances = [];
-            setTimeout(()=>{ text.split(/\n+/).forEach(p=>{ (p.trim().match(/[^.!?]+[.!?]*/g)||[p.trim()]).forEach(s=>{ const st=s.trim(); if(st){const u=new SpeechSynthesisUtterance(st);u.lang='en-US';window.writingUtterances.push(u);window.speechSynthesis.speak(u);} }); }); },50);
-        }
-        if(playWritingBtn) playWritingBtn.addEventListener('click', speakWriting);
-
-        function getHistory(){ try{return JSON.parse(localStorage.getItem('WRITING_HISTORY')||'[]');}catch(e){return [];} }
-        function saveHistory(h){ localStorage.setItem('WRITING_HISTORY',JSON.stringify(h)); renderHistoryList(); }
-
-        if(saveWritingBtn) saveWritingBtn.addEventListener('click', ()=>{
-            const text=writingTextarea.value.trim(); if(!text) return alert('文章是空的！');
-            const fb = aiFeedbackSection.style.display!=='none' ? aiFeedbackContent.innerHTML : '';
-            const history = getHistory();
-            if(currentWritingId){ const idx=history.findIndex(h=>h.id===currentWritingId); if(idx!==-1){history[idx].text=text;history[idx].feedback=fb;history[idx].timestamp=new Date().toISOString();} else pushNew(history,text,fb); }
-            else pushNew(history,text,fb);
-            saveHistory(history); alert('文章已儲存！');
-        });
-        function pushNew(history,text,fb){ currentWritingId=Date.now().toString(); history.push({id:currentWritingId,text,feedback:fb,timestamp:new Date().toISOString()}); }
-
-        window.deleteWritingHistory = function(id){
-            if(!confirm('確定要刪除嗎？')) return;
-            let h=getHistory().filter(x=>x.id!==id); saveHistory(h);
-            if(currentWritingId===id){currentWritingId=null;writingTextarea.value='';if(writingCharCount)writingCharCount.textContent='字數: 0';if(aiFeedbackSection)aiFeedbackSection.style.display='none';}
-        };
-        window.loadWritingHistory = function(id){
-            const item=getHistory().find(x=>x.id===id); if(!item) return;
-            currentWritingId=item.id; writingTextarea.value=item.text;
-            writingTextarea.dispatchEvent(new Event('input'));
-            if(item.feedback&&aiFeedbackSection&&aiFeedbackContent){ aiFeedbackSection.style.display='block'; aiFeedbackContent.innerHTML=item.feedback; bindDictClicks(aiFeedbackContent); }
-            else if(aiFeedbackSection){ aiFeedbackSection.style.display='none'; if(aiFeedbackContent)aiFeedbackContent.innerHTML=''; }
-        };
-        window.renderHistoryList = function(){
-            if(!writingHistoryList) return;
-            const history=getHistory().sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));
-            if(!history.length){ writingHistoryList.innerHTML='<div style="color:#94a3b8;font-size:14px;">目前沒有儲存的紀錄。</div>'; return; }
-            writingHistoryList.innerHTML='';
-            history.forEach(item=>{
-                const d=document.createElement('div');
-                d.style.cssText='background:rgba(255,255,255,0.05);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center;';
-                const date=new Date(item.timestamp).toLocaleString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
-                const preview=item.text.length>25?item.text.substring(0,25)+'...':item.text;
-                d.innerHTML=`<div style="flex:1;cursor:pointer;" onclick="loadWritingHistory('${item.id}')"><div style="color:#cbd5e1;font-size:14px;font-weight:bold;">${date}</div><div style="color:#94a3b8;font-size:13px;margin-top:4px;">${preview}</div></div><button class="btn" style="background:transparent;color:#fca5a5;padding:4px 8px;font-size:16px;" onclick="deleteWritingHistory('${item.id}')">🗑️</button>`;
-                writingHistoryList.appendChild(d);
-            });
-        };
-    })();
-</script>
-    <div class="modal-overlay" id="analysisModal">
-        <div class="modal-content" style="max-width: 800px; display:flex; flex-direction:column; gap:16px;">
-            <div class="modal-header">
-                <h2 id="analysisTitle">📊 個股分析</h2>
-                <button class="close-btn" id="closeAnalysisBtn">&times;</button>
-            </div>
-            <div class="modal-body" style="flex:1; overflow-y:auto; padding-right:8px;" id="analysisBody">
-                <div style="text-align:center; padding:40px; color:#94a3b8;">
-                    <div class="spinner" style="width:30px; height:30px; border:3px solid rgba(255,255,255,0.1); border-top-color:#3b82f6; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 16px;"></div>
-                    載入分析數據中...
-                </div>
-            </div>
-        </div>
-    </div>
-<link rel="stylesheet" href="analysis.css">
-<script src="analysis.js"></script>
+    </script>
 </body>
 
 </html>
